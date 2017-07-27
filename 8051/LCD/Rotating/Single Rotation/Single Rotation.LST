@@ -1,0 +1,234 @@
+C51 COMPILER V8.16   SINGLE_ROTATION                                                       06/08/2017 23:48:21 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE SINGLE_ROTATION
+OBJECT MODULE PLACED IN Single Rotation.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Single Rotation.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          sbit rs = P2^4;
+   4          sbit en = P2^5;
+   5          #define lcdport P0
+   6          sbit R1=P1^0;
+   7          sbit R2=P1^1;
+   8          sbit R3=P1^2;
+   9          sbit R4=P1^3;
+  10          sbit C1=P1^5;
+  11          sbit C2=P1^6;
+  12          sbit C3=P1^7;
+  13          
+  14          char keycheck();        //It returns a character which is send to lcd data
+  15          
+  16          unsigned char keyno, key, flag;  //because character need to be shown
+  17          void lcd_init();
+  18          void lcd_data(unsigned char dat);
+  19          void lcd_command(unsigned char comd);
+  20          void delay(int);
+  21          void lcd_string(unsigned char *s);
+  22          void keyaction(char key);
+  23          
+  24          const unsigned char text[]={"ECE"};
+  25          const unsigned char textm[]={"Electronics"}; 
+  26          void main()
+  27          {
+  28   1      
+  29   1       unsigned char i,j,k, loc2=0xc0, loc1=0x80;
+  30   1                                          
+  31   1       lcd_init();
+  32   1       while(1){                          
+  33   2       for(i=0;text[i]!='\0';i++)
+  34   2       {  
+  35   3               lcd_command(loc1);
+  36   3      
+  37   3                        loc1++;
+  38   3                      lcd_data(text[i]);              
+  39   3               
+  40   3         }
+  41   2         for(i=0;i<40;i++)
+  42   2         {
+  43   3         lcd_command(loc2+i);
+  44   3        for(j=0;textm[j]!='\0';j++)
+  45   3        {
+  46   4                      
+  47   4                        lcd_data(textm[j]);
+  48   4                      
+  49   4        }
+  50   3        lcd_command(0x01);
+  51   3        for(k=0;text[k]!='\0';k++)
+  52   3       {  
+  53   4             
+  54   4                      lcd_data(text[k]);              
+  55   4               
+C51 COMPILER V8.16   SINGLE_ROTATION                                                       06/08/2017 23:48:21 PAGE 2   
+
+  56   4         }
+  57   3       }
+  58   2      }
+  59   1      
+  60   1      }
+  61          
+  62          void lcd_init()                 //To initialize working of lcd
+  63          {
+  64   1      lcd_command(0x02);                // Cursor at home
+  65   1      delay(15000);
+  66   1      
+  67   1      lcd_command(0x28);               //Function Set to 4 bit data bus
+  68   1      delay(40);
+  69   1      
+  70   1      lcd_command(0x06);                //Entry Mode set increament/no shift
+  71   1      delay(40);
+  72   1      
+  73   1      lcd_command(0x0f);                //Display on,cursor displayed,blinks
+  74   1      delay(40);
+  75   1      
+  76   1      lcd_command(0x01);                //Clears all display and returns cursor to home(address 0)
+  77   1      delay(16500);
+  78   1      }
+  79          
+  80          
+  81          void lcd_command(unsigned char comd)      //To send commands using 4 bit bus
+  82          {
+  83   1      rs=0;                                                                     //register select is low which implies command
+  84   1      
+  85   1      lcdport=(comd&0xf0);                                       //Most Significant 4 bits are send to microcontroller first
+  86   1      en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+  87   1      delay(1000);
+  88   1      en=0;
+  89   1                                                                                              //Nest LSB's are transferred
+  90   1      lcdport=(comd<<4);
+  91   1      en=1;
+  92   1      delay(1000);
+  93   1      en=0;
+  94   1      
+  95   1      }
+  96          
+  97          void lcd_data(unsigned char dat)                //To send data to lcd
+  98          {
+  99   1      rs=1;                                                                   //rs high implies read or write, we perform only write as we keep R/W pin grounded
+ 100   1      
+ 101   1      lcdport=(dat&0xf0);
+ 102   1      en=1;
+ 103   1      delay(1000);
+ 104   1      en=0;
+ 105   1      
+ 106   1      lcdport=(dat<<4);
+ 107   1      en=1;
+ 108   1      delay(1000);
+ 109   1      en=0;
+ 110   1      
+ 111   1      }
+ 112          
+ 113          
+ 114                                                                                     
+ 115          void delay(int t)                                          //To delay
+ 116          {
+ 117   1              int i;
+C51 COMPILER V8.16   SINGLE_ROTATION                                                       06/08/2017 23:48:21 PAGE 3   
+
+ 118   1              for(i=0;i<t;i++);
+ 119   1      }
+ 120          
+ 121          /*char keycheck()
+ 122          {
+ 123            C1=1;
+ 124            C2=1;
+ 125            C3=1;
+ 126             keyno='n';
+ 127            C1=0;
+ 128             if(R1==0)
+ 129            {
+ 130              keyno='3';
+ 131            }
+ 132             if(R2==0)
+ 133            {
+ 134              keyno='6';
+ 135            }
+ 136                  if(R3==0)
+ 137                  {
+ 138                          keyno='9';
+ 139                  }
+ 140             if(R4==0)
+ 141             {
+ 142                  keyno='#';
+ 143             }
+ 144          
+ 145            C1=1;
+ 146            C2=0;
+ 147              if(R1==0)
+ 148            {
+ 149              keyno='2';
+ 150            }
+ 151            if(R2==0)
+ 152            {
+ 153              keyno='5';
+ 154             }
+ 155          
+ 156                  if(R3==0)
+ 157                  {
+ 158                          keyno='8';
+ 159                  }
+ 160             if(R4==0)
+ 161             {
+ 162                  keyno='0';
+ 163             }
+ 164            C2=1;
+ 165            C3=0;
+ 166            if(R1==0)
+ 167            {
+ 168              keyno='1';
+ 169            }
+ 170            if(R2==0)
+ 171            {
+ 172              keyno='4';
+ 173                  } 
+ 174            if(R3==0)
+ 175            {
+ 176             keyno='7';
+ 177            } 
+ 178                  
+ 179             if(R4==0)
+C51 COMPILER V8.16   SINGLE_ROTATION                                                       06/08/2017 23:48:21 PAGE 4   
+
+ 180             {
+ 181                  keyno='*';
+ 182             }
+ 183            C3=1;
+ 184          
+ 185            return keyno;
+ 186          }
+ 187          
+ 188          void keyaction(char key)
+ 189          {
+ 190            if(keyno=='n')
+ 191            flag=1;
+ 192          
+ 193                  else if(flag==1)
+ 194                  {
+ 195                          flag=0;
+ 196          
+ 197                          lcd_command(0x01);
+ 198                          lcd_data(key);   //Send keypressed to data
+ 199          
+ 200          
+ 201                   }
+ 202          }
+ 203          
+ 204            */ 
+ 205          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    239    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     19       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

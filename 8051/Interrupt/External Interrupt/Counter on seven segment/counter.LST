@@ -1,0 +1,96 @@
+C51 COMPILER V8.16   COUNTER                                                               06/13/2017 14:23:19 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE COUNTER
+OBJECT MODULE PLACED IN counter.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE counter.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          #define seg_port P0
+   4          
+   5          sbit Unittr = P2^0;
+   6          sbit Tenstr = P2^1;
+   7          sbit Hundtr = P2^2;
+   8          sbit Thsdtr = P2^3;
+   9          
+  10          unsigned char Unit=0, Tens=0, Hund=0, Thsd=0;
+  11          unsigned int flag=0;
+  12          unsigned char Table[]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90};
+  13          void display();
+  14          
+  15          void main()
+  16          {
+  17   1      TCON=0x01;
+  18   1      EX0=1;
+  19   1      EA=1;
+  20   1      
+  21   1       while(1)
+  22   1         {
+  23   2      
+  24   2              if(flag==1)
+  25   2              {
+  26   3                      flag=0;
+  27   3                      Unit++;
+  28   3                      if(Unit==10)
+  29   3                      {
+  30   4                              Unit=0;
+  31   4                              Tens++;
+  32   4                      }
+  33   3                      if(Tens==10)
+  34   3                      {
+  35   4                              Tens=0;
+  36   4                              Hund++;
+  37   4                      }
+  38   3              
+  39   3              }
+  40   2               display();
+  41   2         }
+  42   1      }
+  43          
+  44          void display()
+  45          {
+  46   1      seg_port = Table[Unit];
+  47   1      Unittr=0;
+  48   1      Unittr=1;
+  49   1      
+  50   1      seg_port = Table[Tens];
+  51   1      Tenstr=0;
+  52   1      Tenstr=1;
+  53   1      
+  54   1      seg_port = Table[Hund];
+  55   1      Hundtr=0;
+C51 COMPILER V8.16   COUNTER                                                               06/13/2017 14:23:19 PAGE 2   
+
+  56   1      Hundtr=1;
+  57   1      
+  58   1      seg_port = Table[Thsd];
+  59   1      Thsdtr=0;
+  60   1      Thsdtr=1;
+  61   1      
+  62   1      
+  63   1      }
+  64          
+  65          void ext_int() interrupt 0      using 1
+  66          {
+  67   1              
+  68   1                flag=1;
+  69   1                
+  70   1      
+  71   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    102    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

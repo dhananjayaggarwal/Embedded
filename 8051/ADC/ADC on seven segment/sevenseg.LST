@@ -1,0 +1,152 @@
+C51 COMPILER V8.16   SEVENSEG                                                              06/20/2017 13:58:17 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE SEVENSEG
+OBJECT MODULE PLACED IN sevenseg.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sevenseg.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          #define seg_port P0
+   3          #define adcport P0
+   4          
+   5          
+   6          sbit add_a= P3^6;
+   7          sbit add_b= P3^7;
+   8          sbit ale= P3^2;
+   9          sbit eoc= P3^3;
+  10          sbit clock= P3^4;
+  11          sbit oe= P3^5;
+  12          
+  13          sbit Unittr=P2^0;
+  14          sbit Tenstr=P2^1;
+  15          sbit Hundtr=P2^2;
+  16          sbit Thsdtr=P2^3;
+  17          unsigned char Unit=0, Tens=1, Hund=2, Thsd=3;
+  18          const unsigned char Table[]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90};
+  19          unsigned char value;
+  20          
+  21          void display();
+  22          void adc_read();
+  23          void adc_init();
+  24          void delay(int);
+  25          
+  26          void main()
+  27          {
+  28   1              adc_init();
+  29   1              EA=1;       
+  30   1              ET0=1;
+  31   1          TMOD = 0X01;
+  32   1          TH0  = 0XFF;
+  33   1          TL0  = 0X9C;
+  34   1          TR0=1; 
+  35   1               
+  36   1              while(1)
+  37   1              {
+  38   2      
+  39   2               adc_read();
+  40   2      
+  41   2      
+  42   2                      
+  43   2              }
+  44   1      
+  45   1      }
+  46          
+  47          void display()
+  48          {
+  49   1         seg_port = Table[Unit];
+  50   1              Unittr=0;
+  51   1              delay(100);
+  52   1              Unittr=1;
+  53   1      
+  54   1              seg_port = Table[Tens];
+  55   1              Tenstr=0;
+C51 COMPILER V8.16   SEVENSEG                                                              06/20/2017 13:58:17 PAGE 2   
+
+  56   1              delay(100);
+  57   1              Tenstr=1;
+  58   1      
+  59   1              seg_port = Table[Hund];
+  60   1              Hundtr=0;
+  61   1              delay(100);
+  62   1              Hundtr=1;
+  63   1      
+  64   1              seg_port = Table[Thsd];
+  65   1              Thsdtr=0;
+  66   1              delay(100);
+  67   1              Thsdtr=1;
+  68   1      
+  69   1      }
+  70          
+  71          void adc_init()
+  72          {
+  73   1              ale=0;
+  74   1              eoc=0;
+  75   1              oe=0;
+  76   1              clock=0;
+  77   1              add_a=0;
+  78   1              add_b=0;
+  79   1      }
+  80          
+  81          void adc_read()
+  82          {
+  83   1                
+  84   1              add_a=0;
+  85   1              add_b=0;
+  86   1              ale=1;
+  87   1              delay(1000);
+  88   1              ale=0;
+  89   1              delay(1000);
+  90   1      
+  91   1              while(eoc==1);
+  92   1              
+  93   1              while(eoc==0);
+  94   1      
+  95   1              adcport=0xff;
+  96   1      
+  97   1              oe=1;
+  98   1              value=adcport;
+  99   1              oe=0;
+ 100   1              
+ 101   1      
+ 102   1              Unit=value%10;
+ 103   1              value=value/10;
+ 104   1              Tens=value%10;
+ 105   1              value=value/10;
+ 106   1              Hund=value%10;
+ 107   1              value=value/10;
+ 108   1              Thsd=value%10;
+ 109   1                      display();
+ 110   1      }
+ 111          
+ 112          void delay(int t)
+ 113          {
+ 114   1      int i;
+ 115   1      for(i=0;i<t;i++);
+ 116   1      }
+ 117          
+C51 COMPILER V8.16   SEVENSEG                                                              06/20/2017 13:58:17 PAGE 3   
+
+ 118          
+ 119          void timer0() interrupt 1
+ 120          {
+ 121   1              TH0  = 0XFF;
+ 122   1          TL0  = 0X9C;
+ 123   1              clock=~clock;
+ 124   1      
+ 125   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    229    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     15    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

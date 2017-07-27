@@ -1,0 +1,143 @@
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 11:24:14 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          #define seg_port P0
+   4          
+   5          sbit Unittr = P2^0;
+   6          sbit Tenstr = P2^1;
+   7          sbit Hundtr = P2^2;
+   8          sbit Thsdtr = P2^3;
+   9          
+  10          sbit R1=P1^0;
+  11          sbit R2=P1^1;
+  12          sbit R3=P1^2;
+  13          sbit R4=P1^3;
+  14          sbit C1=P1^5;
+  15          sbit C2=P1^6;
+  16          sbit C3=P1^7;
+  17          
+  18          unsigned char Unit=0, Tens=1, Hund=2, Thsd=3;
+  19          unsigned int keyno, key, key1, key2, key3;
+  20          
+  21          unsigned char Table[]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90};
+  22          void display(int);
+  23          int keycheck();
+  24          
+  25          void main()
+  26          {
+  27   1       while(1)
+  28   1         {
+  29   2           key=keycheck();
+  30   2               display(key);
+  31   2         }
+  32   1      }
+  33          
+  34          void display(int key)
+  35          {
+  36   1      if(key<10)
+  37   1       {
+  38   2              seg_port = Table[key];
+  39   2              Unittr=0;
+  40   2              Unittr=1;
+  41   2       }
+  42   1       else
+  43   1       {
+  44   2       key3=key;
+  45   2               key1=key3%10;
+  46   2               
+  47   2      
+  48   2              seg_port = Table[key1];
+  49   2              Unittr=0;
+  50   2              Unittr=1;
+  51   2      
+  52   2              key2=key3/10;
+  53   2              
+  54   2      
+  55   2              seg_port = Table[key2];
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 11:24:14 PAGE 2   
+
+  56   2                      Thsdtr=0;
+  57   2              Thsdtr=1;
+  58   2      
+  59   2       }
+  60   1      
+  61   1      }
+  62          
+  63          int keycheck()
+  64          {
+  65   1      C1=1;
+  66   1      C2=1;
+  67   1      C3=1;
+  68   1      
+  69   1      C1=0;
+  70   1        if(R1==0)
+  71   1        {
+  72   2          keyno=1;
+  73   2        }
+  74   1        if(R2==0)
+  75   1        {
+  76   2          keyno=2;
+  77   2        }
+  78   1        if(R3==0)
+  79   1         keyno=3;
+  80   1      
+  81   1         if(R4==0)
+  82   1          keyno=10;
+  83   1      
+  84   1      C1=1;
+  85   1      C2=0;
+  86   1          if(R1==0)
+  87   1        {
+  88   2          keyno=4;
+  89   2        }
+  90   1        if(R2==0)
+  91   1        {
+  92   2          keyno=5;
+  93   2         }
+  94   1         if(R3==0)
+  95   1         keyno=6;
+  96   1      if(R4==0)
+  97   1          keyno=11;
+  98   1      
+  99   1      C2=1;
+ 100   1      C3=0;
+ 101   1        if(R1==0)
+ 102   1        {
+ 103   2          keyno=7;
+ 104   2        }
+ 105   1        if(R2==0)
+ 106   1        {
+ 107   2          keyno=8;
+ 108   2              }
+ 109   1              if(R3==0)
+ 110   1         keyno=9; 
+ 111   1         if(R4==0)
+ 112   1          keyno=12; 
+ 113   1      C3=1;
+ 114   1      return keyno;
+ 115   1      
+ 116   1      }
+
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 11:24:14 PAGE 3   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    220    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     24    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

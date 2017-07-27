@@ -1,0 +1,192 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/22/2017  11:24:14  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO keypad display RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  keypad display (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0018H     UNIT         ?DT?MAIN
+            IDATA   0020H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0083H     UNIT         ?PR?KEYCHECK?MAIN
+            CODE    090FH     0055H     UNIT         ?C?LIB_CODE
+            CODE    0964H     004DH     UNIT         ?PR?_DISPLAY?MAIN
+            CODE    09B1H     0019H     UNIT         ?C_INITSEG
+            CODE    09CAH     000CH     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   keypad display (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?KEYCHECK?MAIN
+  +--> ?PR?_DISPLAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  keypad display (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/22/2017  11:24:14  PAGE 2
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  B:0090H.0       PUBLIC        R1
+  B:0090H.1       PUBLIC        R2
+  B:0090H.2       PUBLIC        R3
+  B:0090H.3       PUBLIC        R4
+  B:00A0H.0       PUBLIC        Unittr
+  D:0008H         PUBLIC        Hund
+  D:0009H         PUBLIC        Thsd
+  D:000AH         PUBLIC        Tens
+  D:000BH         PUBLIC        Unit
+  C:09CAH         PUBLIC        main
+  D:000CH         PUBLIC        keyno
+  D:000EH         PUBLIC        key
+  C:088CH         PUBLIC        keycheck
+  D:0010H         PUBLIC        Table
+  B:0090H.5       PUBLIC        C1
+  B:0090H.6       PUBLIC        C2
+  B:0090H.7       PUBLIC        C3
+  C:0964H         PUBLIC        _display
+  D:001AH         PUBLIC        key1
+  D:001CH         PUBLIC        key2
+  B:00A0H.3       PUBLIC        Thsdtr
+  D:001EH         PUBLIC        key3
+  -------         PROC          MAIN
+  C:09CAH         LINE#         25
+  C:09CAH         LINE#         26
+  C:09CAH         LINE#         27
+  C:09CAH         LINE#         28
+  C:09CAH         LINE#         29
+  C:09D1H         LINE#         30
+  C:09D4H         LINE#         31
+  -------         ENDPROC       MAIN
+  -------         PROC          _DISPLAY
+  D:0006H         SYMBOL        key
+  C:0964H         LINE#         34
+  C:0964H         LINE#         35
+  C:0964H         LINE#         36
+  C:096FH         LINE#         37
+  C:096FH         LINE#         38
+  C:0976H         LINE#         39
+  C:0978H         LINE#         40
+  C:097AH         LINE#         41
+  C:097BH         LINE#         43
+  C:097BH         LINE#         44
+  C:097FH         LINE#         45
+  C:098AH         LINE#         48
+  C:0992H         LINE#         49
+  C:0994H         LINE#         50
+  C:0996H         LINE#         52
+  C:09A5H         LINE#         55
+  C:09ACH         LINE#         56
+  C:09AEH         LINE#         57
+  C:09B0H         LINE#         59
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/22/2017  11:24:14  PAGE 3
+
+
+  C:09B0H         LINE#         61
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          KEYCHECK
+  C:088CH         LINE#         63
+  C:088CH         LINE#         64
+  C:088CH         LINE#         65
+  C:088EH         LINE#         66
+  C:0890H         LINE#         67
+  C:0892H         LINE#         69
+  C:0894H         LINE#         70
+  C:0897H         LINE#         71
+  C:0897H         LINE#         72
+  C:089DH         LINE#         73
+  C:089DH         LINE#         74
+  C:08A0H         LINE#         75
+  C:08A0H         LINE#         76
+  C:08A6H         LINE#         77
+  C:08A6H         LINE#         78
+  C:08A9H         LINE#         79
+  C:08AFH         LINE#         81
+  C:08B2H         LINE#         82
+  C:08B8H         LINE#         84
+  C:08BAH         LINE#         85
+  C:08BCH         LINE#         86
+  C:08BFH         LINE#         87
+  C:08BFH         LINE#         88
+  C:08C5H         LINE#         89
+  C:08C5H         LINE#         90
+  C:08C8H         LINE#         91
+  C:08C8H         LINE#         92
+  C:08CEH         LINE#         93
+  C:08CEH         LINE#         94
+  C:08D1H         LINE#         95
+  C:08D7H         LINE#         96
+  C:08DAH         LINE#         97
+  C:08E0H         LINE#         99
+  C:08E2H         LINE#         100
+  C:08E4H         LINE#         101
+  C:08E7H         LINE#         102
+  C:08E7H         LINE#         103
+  C:08EDH         LINE#         104
+  C:08EDH         LINE#         105
+  C:08F0H         LINE#         106
+  C:08F0H         LINE#         107
+  C:08F6H         LINE#         108
+  C:08F6H         LINE#         109
+  C:08F9H         LINE#         110
+  C:08FFH         LINE#         111
+  C:0902H         LINE#         112
+  C:0908H         LINE#         113
+  C:090AH         LINE#         114
+  C:090EH         LINE#         116
+  -------         ENDPROC       KEYCHECK
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?UIDIV
+  C:090FH         PUBLIC        ?C?UIDIV
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/22/2017  11:24:14  PAGE 4
+
+
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00F4H BYTE (11%) *
+******************************************************************************
+
+Program Size: data=33.0 xdata=0 code=473
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

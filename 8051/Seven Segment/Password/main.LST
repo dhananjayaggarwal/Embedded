@@ -1,0 +1,198 @@
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 13:08:30 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          #define seg_port P0
+   4          
+   5          sbit Unittr = P2^0;
+   6          sbit Tenstr = P2^1;
+   7          sbit Hundtr = P2^2;
+   8          sbit Thsdtr = P2^3;
+   9          
+  10          sbit R1=P1^0;
+  11          sbit R2=P1^1;
+  12          sbit R3=P1^2;
+  13          sbit R4=P1^3;
+  14          sbit C1=P1^5;
+  15          sbit C2=P1^6;
+  16          sbit C3=P1^7;
+  17          
+  18          unsigned char Unit, Tens, Hund, Thsd;
+  19          unsigned int keyno, key, flag, flag1;
+  20          
+  21          unsigned char Table[]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90, 0x8c, 0x88, 0x8e, 0xc7 
+             -};
+  22          void display();
+  23          int keycheck();
+  24          void keyaction(int);
+  25          void pass();
+  26          void main()
+  27          {
+  28   1       while(1)
+  29   1         {
+  30   2           key=keycheck();
+  31   2               
+  32   2               keyaction(key);
+  33   2               pass();
+  34   2               display();
+  35   2         }
+  36   1      }
+  37          
+  38          void display()
+  39          {
+  40   1        seg_port = Table[Unit];
+  41   1        Unittr = 0;
+  42   1        Unittr = 1;
+  43   1      
+  44   1        seg_port = Table[Tens];
+  45   1        Tenstr = 0;
+  46   1        Tenstr = 1;
+  47   1      
+  48   1        seg_port = Table[Hund];
+  49   1        Hundtr = 0;
+  50   1        Hundtr = 1;
+  51   1      
+  52   1        seg_port = Table[Thsd];
+  53   1        Thsdtr = 0;
+  54   1        Thsdtr = 1;
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 13:08:30 PAGE 2   
+
+  55   1      
+  56   1      }
+  57          
+  58          int keycheck()
+  59          {
+  60   1      C1=1;
+  61   1      C2=1;
+  62   1      C3=1;
+  63   1        keyno=100;
+  64   1      C1=0;
+  65   1        if(R1==0)
+  66   1        {
+  67   2          keyno=1;
+  68   2        }
+  69   1        if(R2==0)
+  70   1        {
+  71   2          keyno=2;
+  72   2        }
+  73   1        if(R3==0)
+  74   1         keyno=3;
+  75   1      
+  76   1         if(R4==0)
+  77   1          keyno=10;
+  78   1      
+  79   1      C1=1;
+  80   1      C2=0;
+  81   1          if(R1==0)
+  82   1        {
+  83   2          keyno=4;
+  84   2        }
+  85   1        if(R2==0)
+  86   1        {
+  87   2          keyno=5;
+  88   2         }
+  89   1         if(R3==0)
+  90   1         keyno=6;
+  91   1      if(R4==0)
+  92   1          keyno=11;
+  93   1      
+  94   1      C2=1;
+  95   1      C3=0;
+  96   1        if(R1==0)
+  97   1        {
+  98   2          keyno=7;
+  99   2        }
+ 100   1        if(R2==0)
+ 101   1        {
+ 102   2          keyno=8;
+ 103   2              }
+ 104   1              if(R3==0)
+ 105   1         keyno=9; 
+ 106   1         if(R4==0)
+ 107   1          keyno=12; 
+ 108   1      C3=1;
+ 109   1      return keyno;
+ 110   1      
+ 111   1      }
+ 112          
+ 113          
+ 114          void keyaction(int key)
+ 115          {
+ 116   1              if(keyno==100)
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 13:08:30 PAGE 3   
+
+ 117   1              flag=1;
+ 118   1                      
+ 119   1                      else if(flag==1){
+ 120   2                       flag=0;
+ 121   2                       
+ 122   2                        if(key<10){
+ 123   3                              Thsd=Hund;
+ 124   3                              Hund=Tens;
+ 125   3                              Tens=Unit;
+ 126   3                              Unit=key;
+ 127   3                       }
+ 128   2                        
+ 129   2                        else if(key>10){
+ 130   3                                       Thsd=Tens;
+ 131   3                                       Hund=Unit;
+ 132   3                                       Unit=key%10;
+ 133   3                                       Tens=key/10;
+ 134   3                        
+ 135   3                                      }
+ 136   2                              else if(key==10)
+ 137   2                              {
+ 138   3                                      flag1=1;
+ 139   3                              }
+ 140   2      
+ 141   2                      }
+ 142   1      }
+ 143          
+ 144          void pass()
+ 145          {
+ 146   1      if(flag1==1)
+ 147   1      {
+ 148   2              if((Unit==5)&&(Tens==5)&&(Hund==5)&&(Thsd==5))
+ 149   2               {
+ 150   3                      
+ 151   3                      
+ 152   3                              Unit=Tens=5;
+ 153   3                              Hund=11;
+ 154   3                              Thsd=10;
+ 155   3                      }       
+ 156   2      
+ 157   2                              else{
+ 158   3                                              Unit=13;
+ 159   3                                              Tens=1;
+ 160   3                                              Hund=11;
+ 161   3                                              Thsd=12;
+ 162   3                                    }
+ 163   2      
+ 164   2                      
+ 165   2      flag1=0;
+ 166   2      }
+ 167   1      
+ 168   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    373    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     26    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V8.16   MAIN                                                                  04/22/2017 13:08:30 PAGE 4   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

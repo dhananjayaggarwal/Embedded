@@ -1,0 +1,25 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\DhananjayAggarwal\Documents\Dhananjay\8051\Interrupt\clock on seven segment\clock.uv2
+Project File Date:  06/13/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling clock.c...
+CLOCK.C(72): error C141: syntax error near '{'
+CLOCK.C(73): error C129: missing ';' before '++'
+Target not created
+Build target 'Target 1'
+compiling clock.c...
+linking...
+Program Size: data=25.0 xdata=0 code=384
+creating hex file from "clock"...
+"clock" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=25.0 xdata=0 code=384
+creating hex file from "clock"...
+"clock" - 0 Error(s), 0 Warning(s).

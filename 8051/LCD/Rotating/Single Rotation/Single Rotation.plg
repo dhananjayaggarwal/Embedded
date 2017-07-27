@@ -1,0 +1,14 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\DhananjayAggarwal\Documents\Dhananjay\8051\LCD\Rotating\Single Rotation\Single Rotation.uv2
+Project File Date:  06/08/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+linking...
+Program Size: data=34.0 xdata=0 code=403
+creating hex file from "Single Rotation"...
+"Single Rotation" - 0 Error(s), 0 Warning(s).

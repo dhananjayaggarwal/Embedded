@@ -1,0 +1,213 @@
+C51 COMPILER V8.16   CALCULATOR_ENTRY                                                      06/08/2017 10:41:01 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE CALCULATOR_ENTRY
+OBJECT MODULE PLACED IN Calculator_Entry.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Calculator_Entry.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //Calculator Entry on LCD
+   2          
+   3          #include <REGX51.H>
+   4          
+   5          sbit rs = P2^4;
+   6          sbit en = P2^5;
+   7          #define lcdport P0
+   8          sbit R1=P1^0;
+   9          sbit R2=P1^1;
+  10          sbit R3=P1^2;
+  11          sbit R4=P1^3;
+  12          sbit C1=P1^5;
+  13          sbit C2=P1^6;
+  14          sbit C3=P1^7;
+  15          
+  16          char keycheck();        //It returns a character which is send to lcd data
+  17          void keyaction(char key);
+  18          unsigned char keyno, key;        //because character need to be shown
+  19          unsigned int flag;
+  20          void lcd_init();
+  21          void lcd_data(unsigned char dat);
+  22          void lcd_command(unsigned char comd);
+  23          void delay(int);
+  24          void lcd_string(unsigned char *s);
+  25          
+  26          void main()
+  27          {
+  28   1      
+  29   1      lcd_init();
+  30   1      
+  31   1      
+  32   1      while(1){
+  33   2      
+  34   2              key=keycheck();                  //Call to return which key was pressed
+  35   2              keyaction(key);
+  36   2              
+  37   2      }
+  38   1      }
+  39          
+  40          
+  41          void lcd_init()                 //To initialize working of lcd
+  42          {
+  43   1      lcd_command(0x02);                // Cursor at home
+  44   1      delay(15000);
+  45   1      
+  46   1      lcd_command(0x28);               //Function Set to 4 bit data bus
+  47   1      delay(40);
+  48   1      
+  49   1      lcd_command(0x06);                //Entry Mode set increament/no shift
+  50   1      delay(40);
+  51   1      
+  52   1      lcd_command(0x0f);                //Display on,cursor displayed,blinks
+  53   1      delay(40);
+  54   1      
+  55   1      lcd_command(0x01);                //Clears all display and returns cursor to home(address 0)
+C51 COMPILER V8.16   CALCULATOR_ENTRY                                                      06/08/2017 10:41:01 PAGE 2   
+
+  56   1      delay(16500);
+  57   1      }
+  58          
+  59          
+  60          void lcd_command(unsigned char comd)      //To send commands using 4 bit bus
+  61          {
+  62   1      rs=0;                                                                     //register select is low which implies command
+  63   1      
+  64   1      lcdport=(comd&0xf0);                                       //Most Significant 4 bits are send to microcontroller first
+  65   1      en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+  66   1      delay(1000);
+  67   1      en=0;
+  68   1                                                                                              //Nest LSB's are transferred
+  69   1      lcdport=(comd<<4);
+  70   1      en=1;
+  71   1      delay(1000);
+  72   1      en=0;
+  73   1      
+  74   1      }
+  75          
+  76          void lcd_data(unsigned char dat)                //To send data to lcd
+  77          {
+  78   1      rs=1;                                                                   //rs high implies read or write, we perform only write as we keep R/W pin grounded
+  79   1      
+  80   1      lcdport=(dat&0xf0);
+  81   1      en=1;
+  82   1      delay(1000);
+  83   1      en=0;
+  84   1      
+  85   1      lcdport=(dat<<4);
+  86   1      en=1;
+  87   1      delay(1000);
+  88   1      en=0;
+  89   1      
+  90   1      }
+  91          
+  92          
+  93                                                                                     
+  94          void delay(int t)                                          //To delay
+  95          {
+  96   1              int i;
+  97   1              for(i=0;i<t;i++);
+  98   1      }
+  99          
+ 100          char keycheck()
+ 101          {
+ 102   1        C1=1;
+ 103   1        C2=1;
+ 104   1        C3=1;
+ 105   1        keyno='n';
+ 106   1        C1=0;
+ 107   1         if(R1==0)
+ 108   1        {
+ 109   2          keyno='3';
+ 110   2        }
+ 111   1         if(R2==0)
+ 112   1        {
+ 113   2          keyno='6';
+ 114   2        }
+ 115   1              if(R3==0)
+ 116   1              {
+ 117   2                      keyno='9';
+C51 COMPILER V8.16   CALCULATOR_ENTRY                                                      06/08/2017 10:41:01 PAGE 3   
+
+ 118   2              }
+ 119   1         if(R4==0)
+ 120   1         {
+ 121   2              keyno='#';
+ 122   2         }
+ 123   1      
+ 124   1        C1=1;
+ 125   1        C2=0;
+ 126   1          if(R1==0)
+ 127   1        {
+ 128   2          keyno='2';
+ 129   2        }
+ 130   1        if(R2==0)
+ 131   1        {
+ 132   2          keyno='5';
+ 133   2         }
+ 134   1      
+ 135   1              if(R3==0)
+ 136   1              {
+ 137   2                      keyno='8';
+ 138   2              }
+ 139   1         if(R4==0)
+ 140   1         {
+ 141   2              keyno='0';
+ 142   2         }
+ 143   1        C2=1;
+ 144   1        C3=0;
+ 145   1        if(R1==0)
+ 146   1        {
+ 147   2          keyno='1';
+ 148   2        }
+ 149   1        if(R2==0)
+ 150   1        {
+ 151   2          keyno='4';
+ 152   2              } 
+ 153   1        if(R3==0)
+ 154   1        {
+ 155   2         keyno='7';
+ 156   2        } 
+ 157   1              
+ 158   1         if(R4==0)
+ 159   1         {
+ 160   2              keyno='*';
+ 161   2         }
+ 162   1        C3=1;
+ 163   1      
+ 164   1        return keyno;
+ 165   1      }
+ 166          
+ 167          
+ 168          void keyaction(char key)
+ 169          {
+ 170   1        if(keyno=='n')
+ 171   1        flag=1;
+ 172   1      
+ 173   1              else if(flag==1)
+ 174   1              {
+ 175   2                      flag=0;
+ 176   2      
+ 177   2              
+ 178   2                      lcd_data(key);   //Send keypressed to data
+ 179   2      
+C51 COMPILER V8.16   CALCULATOR_ENTRY                                                      06/08/2017 10:41:01 PAGE 4   
+
+ 180   2      
+ 181   2               }
+ 182   1      }
+ 183          
+ 184          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    270    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

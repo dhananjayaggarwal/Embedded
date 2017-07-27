@@ -1,0 +1,94 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/02/2017  12:18:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Rotate RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  Rotate (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     001EH     UNIT         ?PR?MAIN?MAIN
+            CODE    081EH     000FH     UNIT         ?PR?DELAY?MAIN
+            CODE    082DH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   Rotate (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Rotate (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:081EH         PUBLIC        delay
+  C:0800H         PUBLIC        main
+  B:0090H.4       PUBLIC        LedPwrTrans
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/02/2017  12:18:50  PAGE 2
+
+
+  D:0008H         PUBLIC        a
+  -------         PROC          MAIN
+  C:0800H         LINE#         10
+  C:0800H         LINE#         11
+  C:0800H         LINE#         12
+  C:0802H         LINE#         13
+  C:0808H         LINE#         15
+  C:0808H         LINE#         16
+  C:0808H         LINE#         17
+  C:080DH         LINE#         18
+  C:0819H         LINE#         20
+  C:081CH         LINE#         22
+  -------         ENDPROC       MAIN
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:081EH         LINE#         24
+  C:081EH         LINE#         25
+  C:081EH         LINE#         27
+  C:082CH         LINE#         28
+  -------         ENDPROC       DELAY
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002DH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=60
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

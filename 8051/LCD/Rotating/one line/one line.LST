@@ -1,0 +1,176 @@
+C51 COMPILER V8.16   ONE_LINE                                                              06/11/2017 23:32:15 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ONE_LINE
+OBJECT MODULE PLACED IN one line.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE one line.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          sbit rs = P2^4;
+   4          sbit en = P2^5;
+   5          #define lcdport P0
+   6          sbit R1=P1^0;
+   7          sbit R2=P1^1;
+   8          sbit R3=P1^2;
+   9          sbit R4=P1^3;
+  10          sbit C1=P1^5;
+  11          sbit C2=P1^6;
+  12          sbit C3=P1^7;
+  13          
+  14          
+  15          
+  16          void lcd_init();
+  17          void lcd_data(unsigned char dat);
+  18          void lcd_command(unsigned char comd);
+  19          void delay(int);
+  20          void lcd_string(unsigned char *s);
+  21          void keyaction(char key);
+  22          void display(char *p);
+  23          //const unsigned char text[]={"ECE"};
+  24          //const unsigned char textm[]={"Electronics"}; 
+  25          void main()
+  26          {
+  27   1        unsigned int i;
+  28   1      /* unsigned char i,j, loc2=0xc0, loc1=0x80, loc3=0x80;;
+  29   1                                          
+  30   1       lcd_init();                          
+  31   1       for(i=0;text[i]!='\0';i++)
+  32   1       {  
+  33   1               lcd_command(loc1);
+  34   1      
+  35   1                        loc1++;
+  36   1                      lcd_data(text[i]);              
+  37   1               
+  38   1         }
+  39   1         
+  40   1         for(j=0;textm[j]!='\0';j++)
+  41   1        {
+  42   1                        lcd_command(loc2);
+  43   1                         loc2++;
+  44   1                        lcd_data(textm[j]);
+  45   1                       
+  46   1                      
+  47   1        }
+  48   1      for(i=0;i<40;i++)
+  49   1      {
+  50   1              lcd_command(0x18);
+  51   1              
+  52   1              for(j=0;text[j]!='\0';j++)
+  53   1       {  
+  54   1               lcd_command(loc3+1);
+  55   1      
+C51 COMPILER V8.16   ONE_LINE                                                              06/11/2017 23:32:15 PAGE 2   
+
+  56   1                        loc3++;
+  57   1                      lcd_data(text[j]);              
+  58   1               
+  59   1         }
+  60   1         
+  61   1      } */
+  62   1      
+  63   1      lcd_init();
+  64   1      while(1){
+  65   2      lcd_command(0x80);
+  66   2      lcd_command(0x06);
+  67   2              display("Kya byomi nalla?");
+  68   2              lcd_command(0xcf);
+  69   2              lcd_command(0x04);
+  70   2              display("allan si ehs seY");
+  71   2       //lcd_command(0x18); 
+  72   2      
+  73   2                       //"allan si ehs seY"
+  74   2      
+  75   2      }
+  76   1      }
+*** WARNING C280 IN LINE 27 OF ONE LINE.C: 'i': unreferenced local variable
+  77          
+  78          
+  79          
+  80          void lcd_init()                 //To initialize working of lcd
+  81          {
+  82   1      lcd_command(0x02);                // Cursor at home
+  83   1      delay(15000);
+  84   1      
+  85   1      lcd_command(0x28);               //Function Set to 4 bit data bus
+  86   1      delay(40);
+  87   1      
+  88   1      lcd_command(0x06);                //Entry Mode set increament/no shift
+  89   1      delay(40);
+  90   1      
+  91   1      lcd_command(0x0f);                //Display on,cursor displayed,blinks
+  92   1      delay(40);
+  93   1      
+  94   1      lcd_command(0x01);                //Clears all display and returns cursor to home(address 0)
+  95   1      delay(16500);
+  96   1      }
+  97          
+  98          
+  99          void lcd_command(unsigned char comd)      //To send commands using 4 bit bus
+ 100          {
+ 101   1      rs=0;                                                                     //register select is low which implies command
+ 102   1      
+ 103   1      lcdport=(comd&0xf0);                                       //Most Significant 4 bits are send to microcontroller first
+ 104   1      en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+ 105   1      delay(1000);
+ 106   1      en=0;
+ 107   1                                                                                              //Nest LSB's are transferred
+ 108   1      lcdport=(comd<<4);
+ 109   1      en=1;
+ 110   1      delay(1000);
+ 111   1      en=0;
+ 112   1      
+ 113   1      }
+ 114          
+ 115          void lcd_data(unsigned char dat)                //To send data to lcd
+ 116          {
+C51 COMPILER V8.16   ONE_LINE                                                              06/11/2017 23:32:15 PAGE 3   
+
+ 117   1      rs=1;                                                                   //rs high implies read or write, we perform only write as we keep R/W pin grounded
+ 118   1      
+ 119   1      lcdport=(dat&0xf0);
+ 120   1      en=1;
+ 121   1      delay(1000);
+ 122   1      en=0;
+ 123   1      
+ 124   1      lcdport=(dat<<4);
+ 125   1      en=1;
+ 126   1      delay(1000);
+ 127   1      en=0;
+ 128   1      
+ 129   1      }
+ 130          
+ 131          
+ 132                                                                                     
+ 133          void delay(int t)                                          //To delay
+ 134          {
+ 135   1              int i;
+ 136   1              for(i=0;i<t;i++);
+ 137   1      }
+ 138          
+ 139          void display(char *p)
+ 140          {
+ 141   1              while(*p!='\0')
+ 142   1              {
+ 143   2                      lcd_data(*p);
+ 144   2                      p++;
+ 145   2              }
+ 146   1      
+ 147   1      
+ 148   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    211    ----
+   CONSTANT SIZE    =     34    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

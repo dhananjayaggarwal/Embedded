@@ -1,0 +1,203 @@
+C51 COMPILER V8.16   ROTATE_ONE                                                            06/13/2017 12:29:18 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ROTATE_ONE
+OBJECT MODULE PLACED IN Rotate one.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Rotate one.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #define lcdport P0
+   3          sbit rs = P2^4;
+   4          sbit en = P2^5;
+   5          sbit R1=P1^0;
+   6          sbit R2=P1^1;
+   7          sbit R3=P1^2;
+   8          sbit R4=P1^3;
+   9          sbit C1=P1^5;
+  10          sbit C2=P1^6;
+  11          sbit C3=P1^7;
+  12          
+  13          
+  14          
+  15          void lcd_init();
+  16          void lcd_data(unsigned char dat);
+  17          void lcd_command(unsigned char comd);
+  18          void delay(int);
+  19          void lcd_string(unsigned char *s);
+  20          
+  21          void display(char *p);
+  22          char c[15] = {"Yes Absolutely!"};
+  23          char d[] = {"Are you Fine?"};
+  24          
+  25          void main()
+  26          {
+  27   1        unsigned char i,j,k,l,a,m,b, loc=0x8f;
+  28   1      
+  29   1      lcd_init();
+  30   1      
+  31   1       
+  32   1               lcd_command(0x82);
+  33   1       display(&d[0]);
+  34   1      //delay(30000);
+  35   1      //lcd_command(0x07);
+  36   1      //delay(30000);
+  37   1        while(1){
+  38   2              for(i=0xcf;i>=0xc0;i--)
+  39   2              {
+  40   3                        k=0;
+  41   3                        for(j=i;j<=0xcf;j++)
+  42   3                        {
+  43   4                              lcd_command(j);
+  44   4                              lcd_data(c[k]);
+  45   4                              
+  46   4                              k++;
+  47   4                      
+  48   4                              if(i==0xc0&&j==0xcf)
+  49   4                               goto xyz;
+  50   4                              
+  51   4      
+  52   4                        }
+  53   3      
+  54   3               }
+  55   2      
+C51 COMPILER V8.16   ROTATE_ONE                                                            06/13/2017 12:29:18 PAGE 2   
+
+  56   2        xyz:
+  57   2               if(i==0xc0&&j==0xcf)
+  58   2                               {
+  59   3                                      for(a=1;a<16;a++)
+  60   3                                      {        k=0;
+  61   4                                              lcd_command(0xc0);
+  62   4                                              for(b=0;b<15-a;b++)
+  63   4                                              {
+  64   5                                                      lcd_data(c[k+a]);
+  65   5                                                      delay(1000);
+  66   5                                                      k++;
+  67   5                                              }
+  68   4                                              lcd_command(0x01);
+  69   4                                              lcd_command(0x82);
+  70   4                                              display(&d[0]);
+  71   4                                      }
+  72   3      
+  73   3      
+  74   3                               }
+  75   2      /*
+  76   2      xyz:
+  77   2              if(i==0xc0&&j==0xcf)
+  78   2              {
+  79   2              
+  80   2              for(l=0;l<16;l++){
+  81   2                      m=0;
+  82   2                      for(a=0xc0;a<0xcf;a++)
+  83   2                      {
+  84   2                              lcd_command(a);
+  85   2                              lcd_data(c[m+l]);
+  86   2                              delay(1000);
+  87   2                              m++;
+  88   2                      }
+  89   2              }
+  90   2         }  */
+  91   2      }        
+  92   1              
+  93   1      
+  94   1      }
+*** WARNING C280 IN LINE 27 OF ROTATE ONE.C: 'l': unreferenced local variable
+*** WARNING C280 IN LINE 27 OF ROTATE ONE.C: 'm': unreferenced local variable
+  95          
+  96                  
+  97          
+  98          
+  99          
+ 100          
+ 101          
+ 102          
+ 103          void lcd_init()                 //To initialize working of lcd
+ 104          {
+ 105   1      lcd_command(0x02);                // Cursor at home
+ 106   1      delay(15000);
+ 107   1      
+ 108   1      lcd_command(0x28);               //Function Set to 4 bit data bus
+ 109   1      delay(40);
+ 110   1      
+ 111   1      lcd_command(0x06);                //Entry Mode set increament/no shift
+ 112   1      delay(40);
+ 113   1      
+ 114   1      lcd_command(0x0c);                //Display on,cursor displayed,blinks
+ 115   1      delay(40);
+C51 COMPILER V8.16   ROTATE_ONE                                                            06/13/2017 12:29:18 PAGE 3   
+
+ 116   1      
+ 117   1      lcd_command(0x01);                //Clears all display and returns cursor to home(address 0)
+ 118   1      delay(16500);
+ 119   1      }
+ 120          
+ 121          
+ 122          void lcd_command(unsigned char comd)      //To send commands using 4 bit bus
+ 123          {
+ 124   1      rs=0;                                                                     //register select is low which implies command
+ 125   1      
+ 126   1      lcdport=(comd&0xf0);                                       //Most Significant 4 bits are send to microcontroller first
+ 127   1      en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+ 128   1      delay(500);
+ 129   1      en=0;
+ 130   1                                                                                              //Next LSB's are transferred
+ 131   1      lcdport=(comd<<4);
+ 132   1      en=1;
+ 133   1      delay(500);
+ 134   1      en=0;
+ 135   1      
+ 136   1      }
+ 137          
+ 138          void lcd_data(unsigned char dat)                //To send data to lcd
+ 139          {
+ 140   1      rs=1;                                                                   //rs high implies read or write, we perform only write as we keep R/W pin grounded
+ 141   1      
+ 142   1      lcdport=(dat&0xf0);
+ 143   1      en=1;
+ 144   1      delay(10);
+ 145   1      en=0;
+ 146   1      
+ 147   1      lcdport=(dat<<4);
+ 148   1      en=1;
+ 149   1      delay(10);
+ 150   1      en=0;
+ 151   1      
+ 152   1      }
+ 153          
+ 154          
+ 155                                                                                     
+ 156          void delay(int t)                                          //To delay
+ 157          {
+ 158   1              int i;
+ 159   1              for(i=0;i<t;i++);
+ 160   1      }
+ 161          
+ 162          void display(char *p)
+ 163          {
+ 164   1              while(*p!='\0')
+ 165   1              {
+ 166   2                      lcd_data(*p);
+ 167   2                      p++;
+ 168   2                      
+ 169   2              }
+ 170   1      
+ 171   1      
+ 172   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    351    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V8.16   ROTATE_ONE                                                            06/13/2017 12:29:18 PAGE 4   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     29      13
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

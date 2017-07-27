@@ -1,0 +1,160 @@
+C51 COMPILER V8.16   ADCSEVEN                                                              06/22/2017 13:07:21 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ADCSEVEN
+OBJECT MODULE PLACED IN adcSeven.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE adcSeven.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          #define segport P0
+   3          #define adcport P0
+   4          
+   5          sbit add_a=P3^6;
+   6          sbit add_b=P3^7;
+   7          sbit ale=P3^2;
+   8          sbit st=P3^2;
+   9          sbit eoc=P3^3;
+  10          sbit clock=P3^4;
+  11          sbit oe=P3^5;
+  12          
+  13          sbit unittr=P2^0;
+  14          sbit tenstr=P2^1;
+  15          sbit hundtr=P2^2;
+  16          sbit thsdtr=P2^3;
+  17          
+  18          unsigned char Unit=0, Tens=0, Hund=0, Thsd=0;
+  19          unsigned char Table[]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90};
+  20          unsigned char value, flag, count=0;
+  21          
+  22          void adc_init();
+  23          void adc_read();
+  24          void display();
+  25          void delay(int);
+  26          
+  27          void main()
+  28          {
+  29   1      
+  30   1              EA=1;
+  31   1              ET0=1;
+  32   1              TMOD = 0x01;
+  33   1              TH0= 0xff;
+  34   1              TL0= 0x9c;
+  35   1              TR0=1;
+  36   1              
+  37   1              while(1)
+  38   1              {
+  39   2              
+  40   2                      if(flag==1)
+  41   2                      {
+  42   3                      flag=0;
+  43   3      
+  44   3                              adc_read();
+  45   3                      }
+  46   2                      display();
+  47   2              }
+  48   1      }
+  49          
+  50          void delay(int t)
+  51          {
+  52   1      int i;
+  53   1      for(i=0; i<t; i++)
+  54   1      {}
+  55   1      }
+C51 COMPILER V8.16   ADCSEVEN                                                              06/22/2017 13:07:21 PAGE 2   
+
+  56          
+  57          
+  58          
+  59          void adc_read()
+  60          {
+  61   1              add_a=0;
+  62   1              add_b=0;
+  63   1              ale=1;
+  64   1              delay(50);
+  65   1              st=1;
+  66   1              delay(50);
+  67   1              ale=0;
+  68   1              st=0;
+  69   1      
+  70   1              while(eoc==1);
+  71   1              while(eoc==0);
+  72   1      
+  73   1              adcport=0xff;
+  74   1      
+  75   1      
+  76   1      
+  77   1              oe=1;
+  78   1              value=adcport;
+  79   1              oe=0;
+  80   1      
+  81   1              
+  82   1      
+  83   1              Unit=value%10;
+  84   1              value=value/10;
+  85   1              Tens=value%10;
+  86   1              value=value/10;
+  87   1              Hund=value%10;
+  88   1              value=value/10;
+  89   1              Thsd=value%10;
+  90   1      
+  91   1              
+  92   1      
+  93   1      }
+  94          
+  95          
+  96          
+  97          void display()
+  98          {
+  99   1              segport = Table[Unit];
+ 100   1              unittr=0;
+ 101   1              delay(100);
+ 102   1              unittr=1;
+ 103   1      
+ 104   1              segport = Table[Tens];
+ 105   1              tenstr=0;
+ 106   1              delay(100);
+ 107   1              tenstr=1;
+ 108   1      
+ 109   1              segport = Table[Hund];
+ 110   1              hundtr=0;
+ 111   1              delay(100);
+ 112   1              hundtr=1;
+ 113   1      
+ 114   1              segport = Table[Thsd];
+ 115   1              thsdtr=0;
+ 116   1              delay(100);
+ 117   1              thsdtr=1;
+C51 COMPILER V8.16   ADCSEVEN                                                              06/22/2017 13:07:21 PAGE 3   
+
+ 118   1      
+ 119   1      }
+ 120          
+ 121          void timer0() interrupt 1
+ 122          {
+ 123   1              TH0=0xff;
+ 124   1              TL0=0x9c;
+ 125   1              clock=~clock;
+ 126   1              
+ 127   1              count++;
+ 128   1              if(count==150)
+ 129   1              {
+ 130   2                      count=0;
+ 131   2                      flag=1;
+ 132   2              }
+ 133   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    243    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

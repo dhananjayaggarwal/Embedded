@@ -1,0 +1,102 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/02/2017  12:43:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Converge and Diverge RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  Converge and Diverge (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?MAIN
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0047H     UNIT         ?PR?MAIN?MAIN
+            CODE    0847H     000FH     UNIT         ?PR?DELAY?MAIN
+            CODE    0856H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   Converge and Diverge (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Converge and Diverge (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  C:0847H         PUBLIC        delay
+  C:0800H         PUBLIC        main
+  B:0090H.4       PUBLIC        LedPwrTrans
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/02/2017  12:43:19  PAGE 2
+
+
+  D:0008H         PUBLIC        a
+  D:000AH         PUBLIC        b
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0847H         LINE#         11
+  C:0847H         LINE#         12
+  C:0847H         LINE#         14
+  C:0855H         LINE#         15
+  -------         ENDPROC       DELAY
+  -------         PROC          MAIN
+  C:0800H         LINE#         18
+  C:0800H         LINE#         19
+  C:0800H         LINE#         21
+  C:0802H         LINE#         22
+  C:0808H         LINE#         23
+  C:080EH         LINE#         24
+  C:080EH         LINE#         25
+  C:080EH         LINE#         26
+  C:0815H         LINE#         27
+  C:0821H         LINE#         28
+  C:082CH         LINE#         29
+  C:082FH         LINE#         30
+  C:083BH         LINE#         31
+  C:083BH         LINE#         32
+  C:0840H         LINE#         33
+  C:0845H         LINE#         34
+  C:0845H         LINE#         35
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0056H BYTE ( 4%) *
+******************************************************************************
+
+Program Size: data=13.0 xdata=0 code=101
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

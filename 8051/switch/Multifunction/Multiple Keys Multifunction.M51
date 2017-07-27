@@ -1,0 +1,317 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/16/2017  12:02:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Multiple Keys Multifunction RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Multiple Keys Multifunction (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?MAIN
+            DATA    0010H     0002H     UNIT         _DATA_GROUP_
+            IDATA   0012H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0057H     UNIT         ?PR?SANDGLASS?MAIN
+            CODE    08E3H     0052H     UNIT         ?PR?KEYCHECK?MAIN
+            CODE    0935H     0051H     UNIT         ?PR?CONVERGE?MAIN
+            CODE    0986H     002DH     UNIT         ?PR?KEYACTION?MAIN
+            CODE    09B3H     002BH     UNIT         ?PR?BINARYCOUNTER?MAIN
+            CODE    09DEH     0023H     UNIT         ?PR?ROTATE?MAIN
+            CODE    0A01H     0011H     UNIT         ?PR?DELAY?MAIN
+            CODE    0A12H     000CH     UNIT         ?PR?BLINK?MAIN
+            CODE    0A1EH     000CH     UNIT         ?PR?SWAP?MAIN
+            CODE    0A2AH     000AH     UNIT         ?PR?MAIN?MAIN
+            CODE    0A34H     0007H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   Multiple Keys Multifunction (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                  -----    -----
+  +--> ?PR?KEYCHECK?MAIN
+  +--> ?PR?KEYACTION?MAIN
+
+?PR?KEYACTION?MAIN             -----    -----
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/16/2017  12:02:58  PAGE 2
+
+
+  +--> ?PR?BLINK?MAIN
+  +--> ?PR?SWAP?MAIN
+  +--> ?PR?ROTATE?MAIN
+  +--> ?PR?CONVERGE?MAIN
+  +--> ?PR?SANDGLASS?MAIN
+  +--> ?PR?BINARYCOUNTER?MAIN
+
+?PR?BLINK?MAIN                 -----    -----
+  +--> ?PR?DELAY?MAIN
+
+?PR?DELAY?MAIN                 -----    -----
+  +--> ?PR?KEYCHECK?MAIN
+
+?PR?SWAP?MAIN                  -----    -----
+  +--> ?PR?DELAY?MAIN
+
+?PR?ROTATE?MAIN                -----    -----
+  +--> ?PR?DELAY?MAIN
+
+?PR?CONVERGE?MAIN              0010H    0002H
+  +--> ?PR?KEYCHECK?MAIN
+  +--> ?PR?DELAY?MAIN
+
+?PR?SANDGLASS?MAIN             -----    -----
+  +--> ?PR?DELAY?MAIN
+
+?PR?BINARYCOUNTER?MAIN         -----    -----
+  +--> ?PR?DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Multiple Keys Multifunction (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  B:0090H.0       PUBLIC        R1
+  B:0090H.1       PUBLIC        R2
+  B:0090H.2       PUBLIC        R3
+  C:0A01H         PUBLIC        delay
+  C:0A12H         PUBLIC        blink
+  C:09DEH         PUBLIC        rotate
+  C:088CH         PUBLIC        sandGlass
+  C:0A2AH         PUBLIC        main
+  D:0008H         PUBLIC        keyno
+  C:0A1EH         PUBLIC        swap
+  D:000AH         PUBLIC        rra
+  B:0090H.4       PUBLIC        PwrTrans
+  C:08E3H         PUBLIC        keycheck
+  C:0986H         PUBLIC        keyaction
+  D:000BH         PUBLIC        rri
+  C:0935H         PUBLIC        converge
+  D:000CH         PUBLIC        a
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/16/2017  12:02:58  PAGE 3
+
+
+  D:000EH         PUBLIC        b
+  C:09B3H         PUBLIC        binaryCounter
+  B:0090H.5       PUBLIC        C1
+  B:0090H.6       PUBLIC        C2
+  B:0090H.7       PUBLIC        C3
+  -------         PROC          MAIN
+  C:0A2AH         LINE#         28
+  C:0A2AH         LINE#         29
+  C:0A2AH         LINE#         30
+  C:0A2CH         LINE#         31
+  C:0A2CH         LINE#         32
+  C:0A2CH         LINE#         33
+  C:0A2FH         LINE#         34
+  C:0A32H         LINE#         35
+  -------         ENDPROC       MAIN
+  -------         PROC          KEYCHECK
+  C:08E3H         LINE#         38
+  C:08E3H         LINE#         39
+  C:08E3H         LINE#         40
+  C:08E5H         LINE#         41
+  C:08E7H         LINE#         42
+  C:08E9H         LINE#         44
+  C:08EBH         LINE#         45
+  C:08EEH         LINE#         46
+  C:08EEH         LINE#         47
+  C:08F4H         LINE#         48
+  C:08F4H         LINE#         49
+  C:08F7H         LINE#         50
+  C:08F7H         LINE#         51
+  C:08FDH         LINE#         52
+  C:08FDH         LINE#         54
+  C:08FFH         LINE#         55
+  C:0901H         LINE#         56
+  C:0904H         LINE#         57
+  C:0904H         LINE#         58
+  C:090AH         LINE#         59
+  C:090AH         LINE#         60
+  C:090DH         LINE#         61
+  C:090DH         LINE#         62
+  C:0913H         LINE#         63
+  C:0913H         LINE#         64
+  C:0915H         LINE#         65
+  C:0917H         LINE#         66
+  C:091AH         LINE#         67
+  C:091AH         LINE#         68
+  C:0920H         LINE#         69
+  C:0920H         LINE#         70
+  C:0923H         LINE#         71
+  C:0923H         LINE#         72
+  C:0929H         LINE#         73
+  C:0929H         LINE#         74
+  C:092CH         LINE#         75
+  C:092CH         LINE#         76
+  C:0932H         LINE#         77
+  C:0932H         LINE#         78
+  C:0934H         LINE#         79
+  -------         ENDPROC       KEYCHECK
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/16/2017  12:02:58  PAGE 4
+
+
+  -------         PROC          KEYACTION
+  C:0986H         LINE#         81
+  C:0986H         LINE#         82
+  C:0986H         LINE#         84
+  C:09A0H         LINE#         85
+  C:09A0H         LINE#         86
+  C:09A3H         LINE#         87
+  C:09A3H         LINE#         88
+  C:09A3H         LINE#         89
+  C:09A6H         LINE#         90
+  C:09A6H         LINE#         91
+  C:09A6H         LINE#         92
+  C:09A9H         LINE#         93
+  C:09A9H         LINE#         94
+  C:09ACH         LINE#         95
+  C:09ACH         LINE#         96
+  C:09AFH         LINE#         97
+  C:09AFH         LINE#         98
+  C:09B2H         LINE#         99
+  C:09B2H         LINE#         102
+  C:09B2H         LINE#         103
+  -------         ENDPROC       KEYACTION
+  -------         PROC          BLINK
+  C:0A12H         LINE#         105
+  C:0A12H         LINE#         106
+  C:0A12H         LINE#         107
+  C:0A15H         LINE#         108
+  C:0A18H         LINE#         109
+  C:0A1BH         LINE#         110
+  -------         ENDPROC       BLINK
+  -------         PROC          SWAP
+  C:0A1EH         LINE#         114
+  C:0A1EH         LINE#         115
+  C:0A1EH         LINE#         116
+  C:0A21H         LINE#         117
+  C:0A24H         LINE#         118
+  C:0A27H         LINE#         119
+  -------         ENDPROC       SWAP
+  -------         PROC          CONVERGE
+  -------         DO            
+  D:0010H         SYMBOL        i
+  -------         ENDDO         
+  C:0935H         LINE#         122
+  C:0935H         LINE#         123
+  C:0935H         LINE#         125
+  C:093BH         LINE#         126
+  C:0941H         LINE#         127
+  C:0946H         LINE#         128
+  C:0946H         LINE#         129
+  C:094DH         LINE#         130
+  C:0959H         LINE#         131
+  C:0964H         LINE#         132
+  C:0967H         LINE#         133
+  C:096FH         LINE#         134
+  C:096FH         LINE#         135
+  C:0972H         LINE#         137
+  C:0985H         LINE#         138
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/16/2017  12:02:58  PAGE 5
+
+
+  -------         ENDPROC       CONVERGE
+  -------         PROC          ROTATE
+  C:09DEH         LINE#         140
+  C:09DEH         LINE#         141
+  C:09DEH         LINE#         143
+  C:09E5H         LINE#         144
+  C:09E5H         LINE#         145
+  C:09EAH         LINE#         146
+  C:09F0H         LINE#         147
+  C:09F2H         LINE#         148
+  C:09F7H         LINE#         149
+  C:09FAH         LINE#         150
+  C:09FDH         LINE#         151
+  C:09FDH         LINE#         152
+  C:0A00H         LINE#         153
+  C:0A00H         LINE#         154
+  -------         ENDPROC       ROTATE
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:0A01H         LINE#         156
+  C:0A01H         LINE#         157
+  C:0A01H         LINE#         160
+  C:0A0FH         LINE#         161
+  -------         ENDPROC       DELAY
+  -------         PROC          SANDGLASS
+  -------         DO            
+  D:0002H         SYMBOL        i
+  D:0004H         SYMBOL        c
+  D:0082H         SYMBOL        j
+  -------         ENDDO         
+  C:088CH         LINE#         165
+  C:088CH         LINE#         166
+  C:088CH         LINE#         168
+  C:0891H         LINE#         169
+  C:0894H         LINE#         172
+  C:0897H         LINE#         173
+  C:0897H         LINE#         174
+  C:089DH         LINE#         175
+  C:08AFH         LINE#         176
+  C:08AFH         LINE#         177
+  C:08B6H         LINE#         178
+  C:08C2H         LINE#         179
+  C:08C5H         LINE#         180
+  C:08C8H         LINE#         181
+  C:08D3H         LINE#         182
+  C:08D9H         LINE#         184
+  C:08E2H         LINE#         186
+  -------         ENDPROC       SANDGLASS
+  -------         PROC          BINARYCOUNTER
+  C:09B3H         LINE#         188
+  C:09B3H         LINE#         189
+  C:09B3H         LINE#         190
+  C:09B9H         LINE#         191
+  C:09BCH         LINE#         192
+  C:09C1H         LINE#         193
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/16/2017  12:02:58  PAGE 6
+
+
+  C:09C1H         LINE#         194
+  C:09C7H         LINE#         195
+  C:09CAH         LINE#         197
+  C:09DDH         LINE#         199
+  -------         ENDPROC       BINARYCOUNTER
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 01AEH BYTE (20%) *
+******************************************************************************
+
+Program Size: data=19.0 xdata=0 code=574
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

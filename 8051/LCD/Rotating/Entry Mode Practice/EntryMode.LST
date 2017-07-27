@@ -1,0 +1,163 @@
+C51 COMPILER V8.16   ENTRYMODE                                                             06/13/2017 10:14:47 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ENTRYMODE
+OBJECT MODULE PLACED IN EntryMode.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EntryMode.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #define lcdport P0
+   3          sbit rs = P2^4;
+   4          sbit en = P2^5;
+   5          sbit R1=P1^0;
+   6          sbit R2=P1^1;
+   7          sbit R3=P1^2;
+   8          sbit R4=P1^3;
+   9          sbit C1=P1^5;
+  10          sbit C2=P1^6;
+  11          sbit C3=P1^7;
+  12          
+  13          
+  14          
+  15          void lcd_init();
+  16          void lcd_data(unsigned char dat);
+  17          void lcd_command(unsigned char comd);
+  18          void delay(int);
+  19          void lcd_string(unsigned char *s);
+  20          
+  21          void display(char *p);
+  22          
+  23          
+  24          void main()
+  25          {
+  26   1        unsigned char i, j=0xcf;
+  27   1      
+  28   1      lcd_init();
+  29   1      
+  30   1      
+  31   1      
+  32   1      //delay(30000);
+  33   1      //lcd_command(0x07);
+  34   1      //delay(30000);
+  35   1         while(1){
+  36   2              for(i=0x80;i<0x8f;i++)
+  37   2              {
+  38   3      
+  39   3              lcd_command(0x06);
+  40   3              lcd_command(0x01);
+  41   3              lcd_command(i);
+  42   3              display("hello");
+  43   3              delay(1000);
+  44   3      //      lcd_command(0x1c); //Right Display Shift
+  45   3              
+  46   3              lcd_command(0x04);
+  47   3      
+  48   3      //       delay(20000);
+  49   3      
+  50   3                      lcd_command(j); //Left Shift
+  51   3                      
+  52   3                      
+  53   3                      display("uoYerAwoH");
+  54   3                      ;
+  55   3                      j--;
+C51 COMPILER V8.16   ENTRYMODE                                                             06/13/2017 10:14:47 PAGE 2   
+
+  56   3                      
+  57   3               }
+  58   2              }
+  59   1        }
+  60                           //"allan si ehs seY"
+  61          
+  62          
+  63          
+  64          
+  65          
+  66          
+  67          void lcd_init()                 //To initialize working of lcd
+  68          {
+  69   1      lcd_command(0x02);                // Cursor at home
+  70   1      delay(15000);
+  71   1      
+  72   1      lcd_command(0x28);               //Function Set to 4 bit data bus
+  73   1      delay(40);
+  74   1      
+  75   1      lcd_command(0x06);                //Entry Mode set increament/no shift
+  76   1      delay(40);
+  77   1      
+  78   1      lcd_command(0x0f);                //Display on,cursor displayed,blinks
+  79   1      delay(40);
+  80   1      
+  81   1      lcd_command(0x01);                //Clears all display and returns cursor to home(address 0)
+  82   1      delay(16500);
+  83   1      }
+  84          
+  85          
+  86          void lcd_command(unsigned char comd)      //To send commands using 4 bit bus
+  87          {
+  88   1      rs=0;                                                                     //register select is low which implies command
+  89   1      
+  90   1      lcdport=(comd&0xf0);                                       //Most Significant 4 bits are send to microcontroller first
+  91   1      en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+  92   1      delay(1000);
+  93   1      en=0;
+  94   1                                                                                              //Next LSB's are transferred
+  95   1      lcdport=(comd<<4);
+  96   1      en=1;
+  97   1      delay(1000);
+  98   1      en=0;
+  99   1      
+ 100   1      }
+ 101          
+ 102          void lcd_data(unsigned char dat)                //To send data to lcd
+ 103          {
+ 104   1      rs=1;                                                                   //rs high implies read or write, we perform only write as we keep R/W pin grounded
+ 105   1      
+ 106   1      lcdport=(dat&0xf0);
+ 107   1      en=1;
+ 108   1      delay(10);
+ 109   1      en=0;
+ 110   1      
+ 111   1      lcdport=(dat<<4);
+ 112   1      en=1;
+ 113   1      delay(10);
+ 114   1      en=0;
+ 115   1      
+ 116   1      }
+ 117          
+C51 COMPILER V8.16   ENTRYMODE                                                             06/13/2017 10:14:47 PAGE 3   
+
+ 118          
+ 119                                                                                     
+ 120          void delay(int t)                                          //To delay
+ 121          {
+ 122   1              int i;
+ 123   1              for(i=0;i<t;i++);
+ 124   1      }
+ 125          
+ 126          void display(char *p)
+ 127          {
+ 128   1              while(*p!='\0')
+ 129   1              {
+ 130   2                      lcd_data(*p);
+ 131   2                      p++;
+ 132   2                      
+ 133   2              }
+ 134   1      
+ 135   1      
+ 136   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    257    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

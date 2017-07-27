@@ -1,0 +1,3 @@
+"main.obj" 
+TO "display keynum" 
+RAMSIZE(256) 

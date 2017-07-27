@@ -1,0 +1,121 @@
+C51 COMPILER V8.16   CLOCK                                                                 06/13/2017 12:16:16 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE CLOCK
+OBJECT MODULE PLACED IN clock.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE clock.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          #define seg_port P0
+   4          
+   5          sbit Unittr = P2^0;
+   6          sbit Tenstr = P2^1;
+   7          sbit Hundtr = P2^2;
+   8          sbit Thsdtr = P2^3;
+   9          
+  10          unsigned char Unit=0, Tens=0, Hund=0, Thsd=0;
+  11          int count=0;
+  12          unsigned char Table[]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90};
+  13          void display();
+  14          void clock();
+  15          
+  16          void main()
+  17          {
+  18   1      
+  19   1      EA=1;
+  20   1      ET0=1;
+  21   1      TMOD=0x01;
+  22   1      display();
+  23   1      TH0=0x4b;
+  24   1      TL0=0xfd;
+  25   1      TR0=1;
+  26   1      
+  27   1       while(1)
+  28   1         {
+  29   2               
+  30   2               display();
+  31   2         }
+  32   1      }
+  33          
+  34          void display()
+  35          {
+  36   1      seg_port = Table[Unit];
+  37   1      Unittr=0;
+  38   1      Unittr=1;
+  39   1      
+  40   1      seg_port = Table[Tens];
+  41   1      Tenstr=0;
+  42   1      Tenstr=1;
+  43   1      
+  44   1      seg_port = Table[Hund];
+  45   1      Hundtr=0;
+  46   1      Hundtr=1;
+  47   1      
+  48   1      seg_port = Table[Thsd];
+  49   1      Thsdtr=0;
+  50   1      Thsdtr=1;
+  51   1      
+  52   1      }
+  53          
+  54          void timer_delay() interrupt 1
+  55          {
+C51 COMPILER V8.16   CLOCK                                                                 06/13/2017 12:16:16 PAGE 2   
+
+  56   1      
+  57   1                       TH0=0x4b;
+  58   1                       TL0=0xfd;
+  59   1                       count++;
+  60   1                       if(count>=20)
+  61   1                       {
+  62   2                              count=0;
+  63   2                              clock();
+  64   2                              
+  65   2                       }
+  66   1      
+  67   1      
+  68   1      }
+  69          
+  70          
+  71           void clock()
+  72           {
+  73   1              Unit++;
+  74   1                              
+  75   1                               if(Unit==10)
+  76   1                              {        Unit=0;
+  77   2                                      Tens++;
+  78   2                              }
+  79   1                               if(Tens==6)
+  80   1                              {          Tens=0;
+  81   2                                      Hund++;
+  82   2                              }
+  83   1                              if(Hund==10)
+  84   1                              {
+  85   2                                      Hund=0;
+  86   2                                      Thsd++;
+  87   2                              }
+  88   1                              if(Thsd==6)
+  89   1                              {
+  90   2                                      Thsd=0;
+  91   2                                      Unit=0;
+  92   2                                      Tens=0;
+  93   2                                      Hund=0;
+  94   2      
+  95   2                              }
+  96   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    209    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     16    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

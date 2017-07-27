@@ -1,0 +1,134 @@
+C51 COMPILER V8.16   ANTITHEFT                                                             07/13/2017 15:35:03 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ANTITHEFT
+OBJECT MODULE PLACED IN antitheft.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE antitheft.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          #include<lcd.h>
+   3          #include<adc.h>
+   4          #include<stdio.h>
+   5          #include<gsm.h>
+   6          #include<uart.h>
+   7          sbit buzz = P2^7;
+   8          sbit relay1 = P2^1;       //pin 22
+   9          sbit relay2 = P2^0;      //pin 21
+  10          sbit closeswitch = P2^3; //switch to off alarm
+  11          sbit ir1 = P2^4; //pin25
+  12          sbit ir2 = P2^5; //pin 26
+  13          unsigned int flag=1, i;
+  14          unsigned char buffer[10];
+  15          void detect();
+  16          void check_ir(void);
+  17          char ok[]="OK";
+  18          
+  19          char strbuf[25];
+  20          int count=0;
+  21          void main()
+  22          {
+  23   1        lcd_init();
+  24   1        custom();
+  25   1        lcd_string("Welcome...");
+  26   1        uart_init();
+  27   1        ir2=0;
+  28   1        relay1=0;
+  29   1        relay2=0;
+  30   1        buzz=0;
+  31   1       /* tx_string("AT");
+  32   1              str[0]=rx_data;
+  33   1              str[1]=rx_data;
+  34   1              while(!strcomp(str,ok));
+  35   1              str[0]='\0';
+  36   1         */
+  37   1        
+  38   1              while(1)
+  39   1              {
+  40   2                 detect();
+  41   2                 
+  42   2                 adc_read();
+  43   2                 sprintf(buffer,"%d",adcvalue);
+  44   2                 
+  45   2                 if(flag==1)
+  46   2                 {
+  47   3                   flag=0;
+  48   3                       detect();
+  49   3                 }
+  50   2                
+  51   2                 
+  52   2                 
+  53   2              }
+  54   1      
+  55   1              
+C51 COMPILER V8.16   ANTITHEFT                                                             07/13/2017 15:35:03 PAGE 2   
+
+  56   1      }
+  57          
+  58          /*void buzzer()
+  59                  {
+  60                          if(adc_output>=88)
+  61                          {
+  62                            buzz=1;
+  63                            relay1=1;
+  64                            relay2=1;
+  65                            lcd_string("Danger"); 
+  66                          } else if(adc_output<88)
+  67                          {       buzz=0;
+  68                              relay1=0;
+  69                                  relay2=0;                                                       ]
+  70                           }
+  71          
+  72                          lcd_string(buffer);
+  73                  }*/
+  74          
+  75          void detect()
+  76          {
+  77   1              if(ir2==1) //as soon as ir sensor output becomes high
+  78   1              {
+  79   2              //      buzz=1; 
+  80   2              //      delay(1000);                      //switch everything on
+  81   2                      relay1=1;
+  82   2                      delay(1500);
+  83   2                      relay2=1;
+  84   2                      delay(1500);
+  85   2                      lcd_command(0x01);
+  86   2                      lcd_string("ALERT");
+  87   2                      lcd_data(0); //Three exclamations are stored on location 0 of cg ram
+  88   2                      gsm_call();
+  89   2              }
+  90   1              if(closeswitch==0)         //as soon as switch is pressed, switch off alarms/relays
+  91   1              {
+  92   2                        buzz=0;
+  93   2                          relay1=0;
+  94   2                              relay2=0;
+  95   2                              lcd_command(0x01);
+  96   2                              lcd_string("You are now safe");
+  97   2              }
+  98   1      
+  99   1      }
+ 100          
+ 101          void check_ir()
+ 102          {
+ 103   1              if(ir2==1)
+ 104   1              {
+ 105   2              flag=1;
+ 106   2              }
+ 107   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    580    ----
+   CONSTANT SIZE    =     37    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     74       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V8.16   ANTITHEFT                                                             07/13/2017 15:35:03 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

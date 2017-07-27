@@ -1,0 +1,234 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        06/13/2017  12:29:18  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE Rotate one.obj TO Rotate One Line RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  Rotate one.obj (ROTATE_ONE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Rotate One Line (ROTATE_ONE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     001DH     UNIT         ?DT?ROTATE_ONE
+            DATA    0025H     000CH     UNIT         _DATA_GROUP_
+            IDATA   0031H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     009CH     UNIT         ?PR?MAIN?ROTATE_ONE
+            CODE    089CH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0928H     003CH     UNIT         ?PR?LCD_INIT?ROTATE_ONE
+            CODE    0964H     0029H     UNIT         ?PR?_DISPLAY?ROTATE_ONE
+            CODE    098DH     0028H     UNIT         ?PR?_LCD_DATA?ROTATE_ONE
+            CODE    09B5H     0022H     UNIT         ?PR?_DELAY?ROTATE_ONE
+            CODE    09D7H     0022H     UNIT         ?C_INITSEG
+            CODE    09F9H     0019H     UNIT         ?C?LIB_CODE
+            CODE    0A12H     0014H     UNIT         ?PR?_LCD_COMMAND?ROTATE_ONE
+
+
+
+OVERLAY MAP OF MODULE:   Rotate One Line (ROTATE_ONE)
+
+
+SEGMENT                               DATA_GROUP 
+  +--> CALLED SEGMENT               START    LENGTH
+---------------------------------------------------
+?C_C51STARTUP                       -----    -----
+  +--> ?PR?MAIN?ROTATE_ONE
+  +--> ?C_INITSEG
+
+?PR?MAIN?ROTATE_ONE                 0025H    0008H
+  +--> ?PR?LCD_INIT?ROTATE_ONE
+  +--> ?PR?_LCD_COMMAND?ROTATE_ONE
+  +--> ?PR?_DISPLAY?ROTATE_ONE
+  +--> ?PR?_LCD_DATA?ROTATE_ONE
+  +--> ?PR?_DELAY?ROTATE_ONE
+
+BL51 BANKED LINKER/LOCATER V6.15                                                      06/13/2017  12:29:18  PAGE 2
+
+
+?PR?LCD_INIT?ROTATE_ONE             -----    -----
+  +--> ?PR?_LCD_COMMAND?ROTATE_ONE
+  +--> ?PR?_DELAY?ROTATE_ONE
+
+?PR?_LCD_COMMAND?ROTATE_ONE         002DH    0001H
+  +--> ?PR?_DELAY?ROTATE_ONE
+
+?PR?_DISPLAY?ROTATE_ONE             002DH    0003H
+  +--> ?PR?_LCD_DATA?ROTATE_ONE
+
+?PR?_LCD_DATA?ROTATE_ONE            0030H    0001H
+  +--> ?PR?_DELAY?ROTATE_ONE
+
+
+
+SYMBOL TABLE OF MODULE:  Rotate One Line (ROTATE_ONE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ROTATE_ONE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:09BFH         PUBLIC        _delay
+  C:0800H         PUBLIC        main
+  C:098DH         PUBLIC        _lcd_data
+  C:0928H         PUBLIC        lcd_init
+  B:00A0H.5       PUBLIC        en
+  D:0008H         PUBLIC        c
+  D:0017H         PUBLIC        d
+  B:00A0H.4       PUBLIC        rs
+  C:0A12H         PUBLIC        _lcd_command
+  C:096AH         PUBLIC        _display
+  -------         PROC          MAIN
+  -------         DO            
+  D:0025H         SYMBOL        i
+  D:0026H         SYMBOL        j
+  D:0027H         SYMBOL        k
+  D:0028H         SYMBOL        l
+  D:0029H         SYMBOL        a
+  D:002AH         SYMBOL        m
+  D:002BH         SYMBOL        b
+  D:002CH         SYMBOL        loc
+  C:0847H         SYMBOL        xyz
+  -------         ENDDO         
+  C:0800H         LINE#         25
+  C:0800H         LINE#         26
+  C:0800H         LINE#         27
+  C:0803H         LINE#         29
+  C:0806H         LINE#         32
+  C:080BH         LINE#         33
+  C:080EH         LINE#         37
+  C:080EH         LINE#         38
+  C:0811H         LINE#         39
+  C:0811H         LINE#         40
+BL51 BANKED LINKER/LOCATER V6.15                                                      06/13/2017  12:29:18  PAGE 3
+
+
+  C:0814H         LINE#         41
+  C:081EH         LINE#         42
+  C:081EH         LINE#         43
+  C:0823H         LINE#         44
+  C:082DH         LINE#         46
+  C:082FH         LINE#         48
+  C:083AH         LINE#         49
+  C:083AH         LINE#         52
+  C:083EH         LINE#         54
+  C:0847H         LINE#         56
+  C:0847H         LINE#         57
+  C:0851H         LINE#         58
+  C:0851H         LINE#         59
+  C:085BH         LINE#         60
+  C:085EH         LINE#         61
+  C:0863H         LINE#         62
+  C:0872H         LINE#         63
+  C:0872H         LINE#         64
+  C:087EH         LINE#         65
+  C:0885H         LINE#         66
+  C:0887H         LINE#         67
+  C:088BH         LINE#         68
+  C:0890H         LINE#         69
+  C:0895H         LINE#         70
+  C:0898H         LINE#         71
+  -------         ENDPROC       MAIN
+  -------         PROC          LCD_INIT
+  C:0928H         LINE#         103
+  C:0928H         LINE#         104
+  C:0928H         LINE#         105
+  C:092DH         LINE#         106
+  C:0934H         LINE#         108
+  C:0939H         LINE#         109
+  C:0940H         LINE#         111
+  C:0945H         LINE#         112
+  C:094CH         LINE#         114
+  C:0951H         LINE#         115
+  C:0958H         LINE#         117
+  C:095DH         LINE#         118
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _LCD_COMMAND
+  D:002DH         SYMBOL        comd
+  C:0A12H         LINE#         122
+  C:0A14H         LINE#         123
+  C:0A14H         LINE#         124
+  C:0A16H         LINE#         126
+  C:0A18H         LINE#         127
+  C:0A18H         LINE#         128
+  C:0A1BH         LINE#         129
+  C:0A1DH         LINE#         131
+  C:0A20H         LINE#         132
+  C:0A20H         LINE#         133
+  C:0A23H         LINE#         134
+  C:0A25H         LINE#         136
+  -------         ENDPROC       _LCD_COMMAND
+  -------         PROC          _LCD_DATA
+  D:0030H         SYMBOL        dat
+BL51 BANKED LINKER/LOCATER V6.15                                                      06/13/2017  12:29:18  PAGE 4
+
+
+  C:098DH         LINE#         138
+  C:098FH         LINE#         139
+  C:098FH         LINE#         140
+  C:0991H         LINE#         142
+  C:0997H         LINE#         143
+  C:0999H         LINE#         144
+  C:09A0H         LINE#         145
+  C:09A2H         LINE#         147
+  C:09A9H         LINE#         148
+  C:09ABH         LINE#         149
+  C:09B2H         LINE#         150
+  C:09B4H         LINE#         152
+  -------         ENDPROC       _LCD_DATA
+  -------         PROC          L?0030
+  -------         ENDPROC       L?0030
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:09BFH         LINE#         156
+  C:09BFH         LINE#         157
+  C:09BFH         LINE#         159
+  C:09D6H         LINE#         160
+  -------         ENDPROC       _DELAY
+  -------         PROC          L?0031
+  -------         ENDPROC       L?0031
+  -------         PROC          _DISPLAY
+  D:002DH         SYMBOL        p
+  C:096AH         LINE#         162
+  C:0970H         LINE#         163
+  C:0970H         LINE#         164
+  C:097CH         LINE#         165
+  C:097CH         LINE#         166
+  C:097FH         LINE#         167
+  C:098AH         LINE#         169
+  C:098CH         LINE#         172
+  -------         ENDPROC       _DISPLAY
+  -------         ENDMOD        ROTATE_ONE
+
+  -------         MODULE        ?C?CLDPTR
+  C:09F9H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0180H BYTE (18%) *
+******************************************************************************
+
+Program Size: data=50.0 xdata=0 code=553
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,53 @@
+C51 COMPILER V8.16   MAIN                                                                  04/02/2017 11:53:57 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          #define LedPort P0
+   4          sbit LedTrans=P1^4;
+   5          void delay()
+   6          {
+   7   1      int j;
+   8   1      for(j=0;j<31000;j++);
+   9   1      }
+  10          void main()
+  11          {
+  12   1      int a,b;
+  13   1      b=0x01;
+  14   1      LedTrans=0;
+  15   1      
+  16   1      LedPort=0xff;
+  17   1      for(a=0;a<8;a++)
+  18   1        {
+  19   2          LedPort = LedPort << 1;
+  20   2              delay();
+  21   2              
+  22   2        }
+  23   1         for(a=0;a<8;a--)
+  24   1          {
+  25   2              LedPort|=b;
+  26   2              b<<=1;
+  27   2              delay();
+  28   2          }
+  29   1               
+  30   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     82    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

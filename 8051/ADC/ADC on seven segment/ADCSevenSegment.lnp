@@ -1,0 +1,3 @@
+"sevenseg.obj" 
+TO "ADCSevenSegment" 
+RAMSIZE(256) 

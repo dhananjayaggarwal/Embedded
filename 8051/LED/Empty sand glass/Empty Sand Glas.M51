@@ -1,0 +1,119 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/04/2017  12:03:02  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Empty Sand Glas RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Empty Sand Glas (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000AH     UNIT         ?DT?MAIN
+            IDATA   0012H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00A7H     UNIT         ?PR?MAIN?MAIN
+            CODE    08A7H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0933H     000FH     UNIT         ?PR?DELAY?MAIN
+            CODE    0942H     0009H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   Empty Sand Glas (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Empty Sand Glas (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/04/2017  12:03:02  PAGE 2
+
+
+  C:0933H         PUBLIC        delay
+  C:0800H         PUBLIC        main
+  B:0090H.4       PUBLIC        LedPwrTrans
+  D:0008H         PUBLIC        a
+  D:000AH         PUBLIC        b
+  D:000CH         PUBLIC        c
+  D:000EH         PUBLIC        i
+  D:0010H         PUBLIC        j
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        x
+  -------         ENDDO         
+  C:0933H         LINE#         12
+  C:0933H         LINE#         13
+  C:0933H         LINE#         15
+  C:0941H         LINE#         16
+  -------         ENDPROC       DELAY
+  -------         PROC          MAIN
+  C:0800H         LINE#         23
+  C:0800H         LINE#         24
+  C:0800H         LINE#         25
+  C:0802H         LINE#         26
+  C:0802H         LINE#         27
+  C:0802H         LINE#         28
+  C:0808H         LINE#         29
+  C:0808H         LINE#         30
+  C:080EH         LINE#         31
+  C:0824H         LINE#         32
+  C:0824H         LINE#         33
+  C:082BH         LINE#         34
+  C:0837H         LINE#         35
+  C:083AH         LINE#         36
+  C:0844H         LINE#         37
+  C:084FH         LINE#         38
+  C:0857H         LINE#         40
+  C:086CH         LINE#         41
+  C:086CH         LINE#         42
+  C:086CH         LINE#         43
+  C:0872H         LINE#         44
+  C:0877H         LINE#         45
+  C:0877H         LINE#         46
+  C:087AH         LINE#         47
+  C:0886H         LINE#         48
+  C:088FH         LINE#         49
+  C:0892H         LINE#         51
+  C:08A5H         LINE#         52
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00BEH BYTE ( 9%) *
+******************************************************************************
+
+Program Size: data=19.0 xdata=0 code=334
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

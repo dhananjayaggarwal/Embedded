@@ -1,0 +1,108 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/16/2017  13:18:10  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Static RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Static (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000EH     UNIT         ?DT?MAIN
+            IDATA   0016H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0031H     UNIT         ?PR?DISPLAY?MAIN
+            CODE    08BDH     0019H     UNIT         ?C_INITSEG
+            CODE    08D6H     0005H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   Static (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?DISPLAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Static (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/16/2017  13:18:10  PAGE 2
+
+
+  B:00A0H.1       PUBLIC        Tenstr
+  B:00A0H.0       PUBLIC        Unittr
+  D:0008H         PUBLIC        Hund
+  D:0009H         PUBLIC        Thsd
+  D:000AH         PUBLIC        Tens
+  D:000BH         PUBLIC        Unit
+  C:08D6H         PUBLIC        main
+  D:000CH         PUBLIC        Table
+  B:00A0H.2       PUBLIC        Hundtr
+  C:088CH         PUBLIC        display
+  B:00A0H.3       PUBLIC        Thsdtr
+  -------         PROC          MAIN
+  C:08D6H         LINE#         15
+  C:08D6H         LINE#         16
+  C:08D6H         LINE#         17
+  C:08D6H         LINE#         18
+  C:08D6H         LINE#         19
+  C:08D9H         LINE#         20
+  -------         ENDPROC       MAIN
+  -------         PROC          DISPLAY
+  C:088CH         LINE#         23
+  C:088CH         LINE#         24
+  C:088CH         LINE#         25
+  C:0894H         LINE#         26
+  C:0896H         LINE#         27
+  C:0898H         LINE#         29
+  C:08A0H         LINE#         30
+  C:08A2H         LINE#         31
+  C:08A4H         LINE#         33
+  C:08ACH         LINE#         34
+  C:08AEH         LINE#         35
+  C:08B0H         LINE#         37
+  C:08B8H         LINE#         38
+  C:08BAH         LINE#         39
+  C:08BCH         LINE#         42
+  -------         ENDPROC       DISPLAY
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 004EH BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=23.0 xdata=0 code=222
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

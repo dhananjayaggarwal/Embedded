@@ -1,0 +1,61 @@
+C51 COMPILER V8.16   MAIN                                                                  04/02/2017 12:43:19 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //objective: To Converge and diverge
+   2          //Name: Dhananjay Aggarwal
+   3          //Starting Date:2-4-17
+   4          //Cpu Board: Tico Magic
+   5          //uc: AT89S52
+   6          //Crystal:11.0592
+   7          
+   8          #include <REGX51.H>
+   9          
+  10          #define LedPort P0
+  11          void delay()
+  12          {
+  13   1      int i;
+  14   1      for(i=0;i<30000;i++);
+  15   1      }
+  16          sbit LedPwrTrans=P1^4;
+  17          int a,b;
+  18          void main()
+  19          {
+  20   1      
+  21   1      LedPwrTrans=0;
+  22   1      a=0x80;
+  23   1      b=0x01;
+  24   1      while(1)
+  25   1        {
+  26   2         LedPort=~(a|b);
+  27   2         a>>=1;
+  28   2         b<<=1;
+  29   2         delay();
+  30   2         if(a==0x00&&b==0x00)
+  31   2         {
+  32   3              a=0x80;
+  33   3              b=0x01;
+  34   3         }
+  35   2        }
+  36   1      }
+  37          
+  38          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     86    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

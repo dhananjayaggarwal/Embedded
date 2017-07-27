@@ -1,0 +1,213 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        06/20/2017  13:58:18  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE sevenseg.obj TO ADCSevenSegment RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  sevenseg.obj (SEVENSEG)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  ADCSevenSegment (SEVENSEG)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000FH     UNIT         ?DT?SEVENSEG
+            IDATA   0017H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     005FH     UNIT         ?PR?ADC_READ?SEVENSEG
+            CODE    08EBH     003DH     UNIT         ?PR?DISPLAY?SEVENSEG
+            CODE    0928H     001CH     UNIT         ?PR?_DELAY?SEVENSEG
+            CODE    0944H     0019H     UNIT         ?C_INITSEG
+            CODE    095DH     0017H     UNIT         ?PR?MAIN?SEVENSEG
+            CODE    0974H     000DH     UNIT         ?PR?ADC_INIT?SEVENSEG
+            CODE    0981H     0009H     UNIT         ?PR?TIMER0?SEVENSEG
+
+
+
+OVERLAY MAP OF MODULE:   ADCSevenSegment (SEVENSEG)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?SEVENSEG
+  +--> ?C_INITSEG
+
+?PR?MAIN?SEVENSEG
+  +--> ?PR?ADC_INIT?SEVENSEG
+  +--> ?PR?ADC_READ?SEVENSEG
+
+?PR?ADC_READ?SEVENSEG
+  +--> ?PR?_DELAY?SEVENSEG
+  +--> ?PR?DISPLAY?SEVENSEG
+
+BL51 BANKED LINKER/LOCATER V6.15                                                      06/20/2017  13:58:18  PAGE 2
+
+
+?PR?DISPLAY?SEVENSEG
+  +--> ?PR?_DELAY?SEVENSEG
+
+
+
+SYMBOL TABLE OF MODULE:  ADCSevenSegment (SEVENSEG)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SEVENSEG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A0H.1       PUBLIC        Tenstr
+  B:00A8H.7       PUBLIC        EA
+  B:00A0H.0       PUBLIC        Unittr
+  B:00B0H.4       PUBLIC        clock
+  D:0008H         PUBLIC        Hund
+  C:092CH         PUBLIC        _delay
+  D:0009H         PUBLIC        Thsd
+  D:000AH         PUBLIC        Tens
+  D:000BH         PUBLIC        value
+  D:000CH         PUBLIC        Unit
+  C:095DH         PUBLIC        main
+  C:088CH         PUBLIC        adc_read
+  B:00B0H.2       PUBLIC        ale
+  D:0089H         PUBLIC        TMOD
+  B:00B0H.3       PUBLIC        eoc
+  C:0974H         PUBLIC        adc_init
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:0981H         PUBLIC        timer0
+  B:00B0H.5       PUBLIC        oe
+  B:0088H.4       PUBLIC        TR0
+  D:000DH         PUBLIC        Table
+  B:00B0H.6       PUBLIC        add_a
+  B:00B0H.7       PUBLIC        add_b
+  B:00A0H.2       PUBLIC        Hundtr
+  C:08EBH         PUBLIC        display
+  B:00A0H.3       PUBLIC        Thsdtr
+  -------         PROC          MAIN
+  C:095DH         LINE#         26
+  C:095DH         LINE#         27
+  C:095DH         LINE#         28
+  C:0960H         LINE#         29
+  C:0962H         LINE#         30
+  C:0964H         LINE#         31
+  C:0967H         LINE#         32
+  C:096AH         LINE#         33
+  C:096DH         LINE#         34
+  C:096FH         LINE#         36
+  C:096FH         LINE#         37
+  C:096FH         LINE#         39
+  C:0972H         LINE#         43
+BL51 BANKED LINKER/LOCATER V6.15                                                      06/20/2017  13:58:18  PAGE 3
+
+
+  -------         ENDPROC       MAIN
+  -------         PROC          DISPLAY
+  C:08EBH         LINE#         47
+  C:08EBH         LINE#         48
+  C:08EBH         LINE#         49
+  C:08F3H         LINE#         50
+  C:08F5H         LINE#         51
+  C:08F8H         LINE#         52
+  C:08FAH         LINE#         54
+  C:0902H         LINE#         55
+  C:0904H         LINE#         56
+  C:0907H         LINE#         57
+  C:0909H         LINE#         59
+  C:0911H         LINE#         60
+  C:0913H         LINE#         61
+  C:0916H         LINE#         62
+  C:0918H         LINE#         64
+  C:0920H         LINE#         65
+  C:0922H         LINE#         66
+  C:0925H         LINE#         67
+  C:0927H         LINE#         69
+  -------         ENDPROC       DISPLAY
+  -------         PROC          ADC_INIT
+  C:0974H         LINE#         71
+  C:0974H         LINE#         72
+  C:0974H         LINE#         73
+  C:0976H         LINE#         74
+  C:0978H         LINE#         75
+  C:097AH         LINE#         76
+  C:097CH         LINE#         77
+  C:097EH         LINE#         78
+  C:0980H         LINE#         79
+  -------         ENDPROC       ADC_INIT
+  -------         PROC          ADC_READ
+  C:088CH         LINE#         81
+  C:088CH         LINE#         82
+  C:088CH         LINE#         84
+  C:088EH         LINE#         85
+  C:0890H         LINE#         86
+  C:0892H         LINE#         87
+  C:0899H         LINE#         88
+  C:089BH         LINE#         89
+  C:08A2H         LINE#         91
+  C:08A5H         LINE#         93
+  C:08A8H         LINE#         95
+  C:08ABH         LINE#         97
+  C:08ADH         LINE#         98
+  C:08B0H         LINE#         99
+  C:08B2H         LINE#         102
+  C:08BBH         LINE#         103
+  C:08C3H         LINE#         104
+  C:08CAH         LINE#         105
+  C:08D2H         LINE#         106
+  C:08D9H         LINE#         107
+  C:08E1H         LINE#         108
+  C:08E8H         LINE#         109
+  -------         ENDPROC       ADC_READ
+BL51 BANKED LINKER/LOCATER V6.15                                                      06/20/2017  13:58:18  PAGE 4
+
+
+  C:0928H         SYMBOL        L?0018
+  -------         PROC          L?0017
+  -------         ENDPROC       L?0017
+  C:0928H         SYMBOL        L?0018
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:092CH         LINE#         112
+  C:092CH         LINE#         113
+  C:092CH         LINE#         115
+  C:0943H         LINE#         116
+  -------         ENDPROC       _DELAY
+  -------         PROC          TIMER0
+  C:0981H         LINE#         119
+  C:0981H         LINE#         121
+  C:0984H         LINE#         122
+  C:0987H         LINE#         123
+  C:0989H         LINE#         125
+  -------         ENDPROC       TIMER0
+  -------         ENDMOD        SEVENSEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0100H BYTE (12%) *
+******************************************************************************
+
+Program Size: data=24.0 xdata=0 code=400
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

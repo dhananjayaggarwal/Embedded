@@ -1,0 +1,228 @@
+C51 COMPILER V8.16   MAIN                                                                  04/16/2017 12:02:58 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx51.h>
+   2          
+   3          #define LedPort P0
+   4          sbit PwrTrans=P1^4;
+   5          sbit R1=P1^0;
+   6          sbit R2=P1^1;
+   7          sbit R3=P1^2;
+   8          sbit R4=P1^3;
+   9          sbit C1=P1^5;
+  10          sbit C2=P1^6;
+  11          sbit C3=P1^7;
+  12          
+  13          void keycheck();
+  14          void keyaction();
+  15          
+  16          void rotate();
+  17          void converge();
+  18          void sandGlass();
+  19          void binaryCounter();
+  20          void swap();
+  21          void blink();
+  22          void delay();
+  23          
+  24          unsigned int keyno;
+  25          unsigned char rri=0,rra = 0x80;
+  26          int a,b;
+  27          
+  28          void main()
+  29          {
+  30   1      PwrTrans=0;
+  31   1       while(1)
+  32   1       {
+  33   2        keycheck();
+  34   2        keyaction();
+  35   2       }
+  36   1      }
+  37          
+  38          void keycheck()
+  39          {
+  40   1        C1=1;
+  41   1        C2=1;
+  42   1        C3=1;
+  43   1      
+  44   1        C1=0;
+  45   1         if(R1==0)
+  46   1        {
+  47   2          keyno=3;
+  48   2        }
+  49   1         if(R2==0)
+  50   1        {
+  51   2          keyno=6;
+  52   2        }
+  53   1      
+  54   1        C1=1;
+  55   1        C2=0;
+C51 COMPILER V8.16   MAIN                                                                  04/16/2017 12:02:58 PAGE 2   
+
+  56   1          if(R1==0)
+  57   1        {
+  58   2          keyno=2;
+  59   2        }
+  60   1        if(R2==0)
+  61   1        {
+  62   2          keyno=5;
+  63   2         }
+  64   1        C2=1;
+  65   1        C3=0;
+  66   1        if(R1==0)
+  67   1        {
+  68   2          keyno=1;
+  69   2        }
+  70   1        if(R2==0)
+  71   1        {
+  72   2          keyno=4;
+  73   2              } 
+  74   1        if(R3==0)
+  75   1        {
+  76   2         keyno=7;
+  77   2        } 
+  78   1        C3=1;
+  79   1      }
+  80          
+  81          void keyaction()
+  82          {
+  83   1       
+  84   1       switch(keyno)
+  85   1        {
+  86   2              case 1:{ blink();
+  87   3                     break;
+  88   3                         }
+  89   2          case 2: { swap();
+  90   3                      break;
+  91   3                              }
+  92   2              case 3: { rotate();
+  93   3                              break; }
+  94   2              case 4:{ converge();
+  95   3                               break; }
+  96   2              case 5: { sandGlass();
+  97   3                               break; }
+  98   2              case 6: { binaryCounter();
+  99   3                                 break; }
+ 100   2        
+ 101   2        
+ 102   2        }
+ 103   1      }
+ 104          
+ 105          void blink()
+ 106          {
+ 107   1      LedPort=0x00;
+ 108   1      delay();
+ 109   1      LedPort=0xff;
+ 110   1      delay();
+ 111   1      
+ 112   1      }
+ 113          
+ 114          void swap()
+ 115          {
+ 116   1      LedPort=0x0f;
+ 117   1      delay();
+C51 COMPILER V8.16   MAIN                                                                  04/16/2017 12:02:58 PAGE 3   
+
+ 118   1      LedPort=0xf0;
+ 119   1      delay();
+ 120   1      }
+ 121          
+ 122          void converge()
+ 123          {
+ 124   1      int i;
+ 125   1      a=0x80;
+ 126   1      b=0x01;
+ 127   1      for(i=0;i<8;i++)
+ 128   1        {
+ 129   2         LedPort=~(a|b);
+ 130   2         a>>=1;
+ 131   2         b<<=1;
+ 132   2         keycheck();
+ 133   2         if(keyno!=4)
+ 134   2         break;
+ 135   2         delay();
+ 136   2         
+ 137   2        }
+ 138   1      }
+ 139          
+ 140          void rotate()
+ 141          {
+ 142   1      //for(i=0;i<8;i++)
+ 143   1      if(rri<8)
+ 144   1       {
+ 145   2          LedPort=~rra;
+ 146   2              rra=rra>>1;
+ 147   2              rri++;
+ 148   2              if(rri==8)
+ 149   2              {rri=0;
+ 150   3              rra = 0x80;
+ 151   3              }
+ 152   2                delay();
+ 153   2      }
+ 154   1      }
+ 155          
+ 156          void delay()
+ 157          {  
+ 158   1      int j;
+ 159   1      
+ 160   1      for(j=0; j<30000; j++);
+ 161   1      keycheck();
+ 162   1      
+ 163   1      }
+ 164          
+ 165          void sandGlass()
+ 166          {
+ 167   1      int i,c,j;
+ 168   1      b=0x00;
+ 169   1      c=0x01;
+ 170   1      
+ 171   1       
+ 172   1        for(i=8;i>0;i--)
+ 173   1         {
+ 174   2         a=0x80;
+ 175   2           for(j=0;j<i;j++)
+ 176   2               {
+ 177   3                 LedPort=~(a|b);
+ 178   3                 a=a>>1;
+ 179   3                 delay();
+C51 COMPILER V8.16   MAIN                                                                  04/16/2017 12:02:58 PAGE 4   
+
+ 180   3               }
+ 181   2               b<<=1;
+ 182   2               b=b|c;
+ 183   2      
+ 184   2         }
+ 185   1       
+ 186   1      }
+ 187          
+ 188          void binaryCounter()
+ 189          {
+ 190   1               b=0x01;
+ 191   1         LedPort=0xff;
+ 192   1      for(a=0;a<8;a++)
+ 193   1        {
+ 194   2          LedPort = LedPort << 1;
+ 195   2              delay();
+ 196   2              
+ 197   2        }
+ 198   1         
+ 199   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    424    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

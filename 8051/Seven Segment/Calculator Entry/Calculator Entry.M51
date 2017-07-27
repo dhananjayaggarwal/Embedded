@@ -1,0 +1,219 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        04/22/2017  12:38:20  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj TO Calculator Entry RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  Calculator Entry (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0014H     UNIT         ?DT?MAIN
+            IDATA   001CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     008BH     UNIT         ?C?LIB_CODE
+            CODE    0917H     0089H     UNIT         ?PR?KEYCHECK?MAIN
+            CODE    09A0H     0056H     UNIT         ?PR?_KEYACTION?MAIN
+            CODE    09F6H     0031H     UNIT         ?PR?DISPLAY?MAIN
+            CODE    0A27H     000FH     UNIT         ?PR?MAIN?MAIN
+            CODE    0A36H     000DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   Calculator Entry (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?KEYCHECK?MAIN
+  +--> ?PR?_KEYACTION?MAIN
+  +--> ?PR?DISPLAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Calculator Entry (MAIN)
+
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/22/2017  12:38:20  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  B:0090H.0       PUBLIC        R1
+  B:0090H.1       PUBLIC        R2
+  B:00A0H.1       PUBLIC        Tenstr
+  B:0090H.2       PUBLIC        R3
+  B:0090H.3       PUBLIC        R4
+  B:00A0H.0       PUBLIC        Unittr
+  D:0008H         PUBLIC        Hund
+  D:0009H         PUBLIC        Thsd
+  D:000AH         PUBLIC        flag
+  D:000CH         PUBLIC        Tens
+  D:000DH         PUBLIC        Unit
+  C:0A27H         PUBLIC        main
+  D:000EH         PUBLIC        keyno
+  D:0010H         PUBLIC        key
+  C:0917H         PUBLIC        keycheck
+  C:09A0H         PUBLIC        _keyaction
+  D:0012H         PUBLIC        Table
+  B:0090H.5       PUBLIC        C1
+  B:0090H.6       PUBLIC        C2
+  B:0090H.7       PUBLIC        C3
+  B:00A0H.2       PUBLIC        Hundtr
+  C:09F6H         PUBLIC        display
+  B:00A0H.3       PUBLIC        Thsdtr
+  -------         PROC          MAIN
+  C:0A27H         LINE#         26
+  C:0A27H         LINE#         27
+  C:0A27H         LINE#         28
+  C:0A27H         LINE#         29
+  C:0A27H         LINE#         30
+  C:0A2EH         LINE#         32
+  C:0A31H         LINE#         33
+  C:0A34H         LINE#         34
+  -------         ENDPROC       MAIN
+  -------         PROC          DISPLAY
+  C:09F6H         LINE#         37
+  C:09F6H         LINE#         38
+  C:09F6H         LINE#         39
+  C:09FEH         LINE#         40
+  C:0A00H         LINE#         41
+  C:0A02H         LINE#         43
+  C:0A0AH         LINE#         44
+  C:0A0CH         LINE#         45
+  C:0A0EH         LINE#         47
+  C:0A16H         LINE#         48
+  C:0A18H         LINE#         49
+  C:0A1AH         LINE#         51
+  C:0A22H         LINE#         52
+  C:0A24H         LINE#         53
+  C:0A26H         LINE#         55
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/22/2017  12:38:20  PAGE 3
+
+
+  -------         ENDPROC       DISPLAY
+  -------         PROC          KEYCHECK
+  C:0917H         LINE#         57
+  C:0917H         LINE#         58
+  C:0917H         LINE#         59
+  C:0919H         LINE#         60
+  C:091BH         LINE#         61
+  C:091DH         LINE#         62
+  C:0923H         LINE#         63
+  C:0925H         LINE#         64
+  C:0928H         LINE#         65
+  C:0928H         LINE#         66
+  C:092EH         LINE#         67
+  C:092EH         LINE#         68
+  C:0931H         LINE#         69
+  C:0931H         LINE#         70
+  C:0937H         LINE#         71
+  C:0937H         LINE#         72
+  C:093AH         LINE#         73
+  C:0940H         LINE#         75
+  C:0943H         LINE#         76
+  C:0949H         LINE#         78
+  C:094BH         LINE#         79
+  C:094DH         LINE#         80
+  C:0950H         LINE#         81
+  C:0950H         LINE#         82
+  C:0956H         LINE#         83
+  C:0956H         LINE#         84
+  C:0959H         LINE#         85
+  C:0959H         LINE#         86
+  C:095FH         LINE#         87
+  C:095FH         LINE#         88
+  C:0962H         LINE#         89
+  C:0968H         LINE#         90
+  C:096BH         LINE#         91
+  C:0971H         LINE#         93
+  C:0973H         LINE#         94
+  C:0975H         LINE#         95
+  C:0978H         LINE#         96
+  C:0978H         LINE#         97
+  C:097EH         LINE#         98
+  C:097EH         LINE#         99
+  C:0981H         LINE#         100
+  C:0981H         LINE#         101
+  C:0987H         LINE#         102
+  C:0987H         LINE#         103
+  C:098AH         LINE#         104
+  C:0990H         LINE#         105
+  C:0993H         LINE#         106
+  C:0999H         LINE#         107
+  C:099BH         LINE#         108
+  C:099FH         LINE#         110
+  -------         ENDPROC       KEYCHECK
+  -------         PROC          _KEYACTION
+  D:0002H         SYMBOL        key
+  C:09A0H         LINE#         113
+  C:09A4H         LINE#         114
+BL51 BANKED LINKER/LOCATER V6.15                                                      04/22/2017  12:38:20  PAGE 4
+
+
+  C:09A4H         LINE#         115
+  C:09ACH         LINE#         116
+  C:09B2H         LINE#         118
+  C:09BAH         LINE#         119
+  C:09BEH         LINE#         121
+  C:09C9H         LINE#         122
+  C:09CCH         LINE#         123
+  C:09CFH         LINE#         124
+  C:09D2H         LINE#         125
+  C:09D4H         LINE#         126
+  C:09D5H         LINE#         128
+  C:09D5H         LINE#         129
+  C:09D8H         LINE#         130
+  C:09DBH         LINE#         131
+  C:09E8H         LINE#         132
+  C:09F5H         LINE#         134
+  C:09F5H         LINE#         136
+  C:09F5H         LINE#         138
+  -------         ENDPROC       _KEYACTION
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?SIDIV
+  C:088CH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:08C2H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 012BH BYTE (14%) *
+******************************************************************************
+
+Program Size: data=29.0 xdata=0 code=582
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

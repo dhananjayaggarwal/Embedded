@@ -1,0 +1,52 @@
+C51 COMPILER V8.16   DC                                                                    06/22/2017 13:53:10 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE DC
+OBJECT MODULE PLACED IN dc.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE dc.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          sbit in1 = P3^4;
+   3          sbit in2 = P3^5;
+   4          
+   5          void delay(int);
+   6          
+   7          void main()
+   8          {
+   9   1              
+  10   1      while(1)
+  11   1      {        int i;
+  12   2              for(i=0;i<15000;i++)
+  13   2              {
+  14   3              in1=0;
+  15   3              in2=1;
+  16   3              delay(15000-i);
+  17   3              in1=1;
+  18   3              in2=1;
+  19   3              delay(i);
+  20   3              }
+  21   2              
+  22   2      }
+  23   1      }
+  24          
+  25          void delay(int t)
+  26          {
+  27   1              int i;
+  28   1              for(i=0;i<t;i++);
+  29   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     79    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,62 @@
+C51 COMPILER V8.16   TIMER                                                                 06/12/2017 15:50:22 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN Timer.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Timer.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx51.h>
+   2          #define ledport P0
+   3          sbit ledpt = P1^4;
+   4          unsigned int count;
+   5          void main()
+   6          {
+   7   1              ledpt=0;
+   8   1              EA=1;            //Enable Global Interrupt
+   9   1              ET0=1;           //Enable Timer0 Interrupt
+  10   1      
+  11   1              TMOD=0x01;              //16-bit mode for T0
+  12   1      
+  13   1              TH0=0x3c;
+  14   1              TL0=0xb0;       //for 50ms delay         
+  15   1      
+  16   1              TR0=1;          //Timer) enable         //jaise hi timer overflow hoga, uska isr call hoga
+  17   1              ledport=0x00;
+  18   1              while(1)
+  19   1              {
+  20   2                /*while mei chalre hai hum, 50ms hue, uska isr call hua, timer ko firse fill kiya, count ++ kiya, firse
+             - overflow hua, firse count badhaya
+  21   2                      aise hi jaise count 20 hua, if ke andar gaye, ledport ko complement kiya aur count firse 0 kardia*/
+  22   2              }
+  23   1      
+  24   1      
+  25   1      }
+  26          
+  27          void time0() interrupt 1
+  28          {
+  29   1                 TH0=0x3c;
+  30   1                      TL0=0xb0;
+  31   1                      count++;
+  32   1                      if(count>=20)      //50ms 20 times implies one second
+  33   1                      {
+  34   2                              count=0;
+  35   2                              ledport=~ledport;
+  36   2                      }
+  37   1              
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     63    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

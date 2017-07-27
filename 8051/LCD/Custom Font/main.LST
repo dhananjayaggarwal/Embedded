@@ -1,0 +1,134 @@
+C51 COMPILER V8.16   MAIN                                                                  07/12/2017 21:52:37 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //Program To Display Custom Font on 16x2 LCD operated in 4 bit mode
+   2          
+   3          #include<regx52.h>
+   4          #define lcdport P0
+   5          
+   6          void lcd_ini();
+   7          void lcd_com(unsigned char);
+   8          void lcd_data(unsigned char);
+   9          void character();
+  10          void delay(int);
+  11          
+  12          sbit rs = P2^4;
+  13          sbit en = P2^5;
+  14          
+  15          void main()
+  16          {
+  17   1          lcd_ini();          //Initialize The LCD
+  18   1          
+  19   1          character();         //Function having user generated text
+  20   1              lcd_com(0x80);
+  21   1              lcd_data(0);
+  22   1      
+  23   1              while(1)
+  24   1              {
+  25   2                      lcd_com(0x81);
+  26   2                      delay(10000);
+  27   2                      lcd_data(0);
+  28   2                      delay(10000);
+  29   2                      lcd_com(0xc0);
+  30   2                      delay(20000);
+  31   2                      lcd_data(0);
+  32   2                      delay(20000);
+  33   2              }
+  34   1          
+  35   1      }
+  36          
+  37          void lcd_ini()
+  38          {
+  39   1          lcd_com(0x02);      //cursor at home
+  40   1          delay(15000);
+  41   1          
+  42   1          lcd_com(0x28);      //function set
+  43   1          delay(60);
+  44   1          
+  45   1          lcd_com(0x06);      //entry mode
+  46   1          delay(60);
+  47   1          
+  48   1          lcd_com(0x0f);      //display control
+  49   1          delay(60);
+  50   1          
+  51   1          lcd_com(0x01);      //clear display
+  52   1          delay(1640);
+  53   1          
+  54   1      }
+  55          
+C51 COMPILER V8.16   MAIN                                                                  07/12/2017 21:52:37 PAGE 2   
+
+  56          void lcd_com(unsigned char com)
+  57          {
+  58   1          rs = 0;     //command mode
+  59   1              
+  60   1              lcdport = com & 0xf0;
+  61   1          en = 1;
+  62   1          delay(100);
+  63   1          en = 0;
+  64   1          
+  65   1          lcdport = com << 4;
+  66   1          en = 1;
+  67   1          delay(100);
+  68   1          en = 0;
+  69   1      }
+  70          
+  71          void lcd_data(unsigned char alp)
+  72          {
+  73   1          rs = 1;     //command mode
+  74   1          
+  75   1          lcdport = alp & 0xf0;
+  76   1          en = 1;
+  77   1          delay(100);
+  78   1          en = 0;
+  79   1          
+  80   1          lcdport = alp << 4;
+  81   1          en = 1;
+  82   1          delay(100);
+  83   1          en = 0;
+  84   1      }
+  85          
+  86          void character()
+  87          {
+  88   1              lcd_com(64);        //three exclamation in single line
+  89   1              lcd_data(21);
+  90   1          lcd_data(21);
+  91   1          lcd_data(21);
+  92   1          lcd_data(21);
+  93   1          lcd_data(21);
+  94   1          lcd_data(0);
+  95   1          lcd_data(21);
+  96   1          lcd_com(0xc0);
+  97   1              
+  98   1      
+  99   1          
+ 100   1      }
+ 101          
+ 102          void delay(int t)
+ 103          {
+ 104   1          int i;
+ 105   1          
+ 106   1          for(i=0; i<t; i++);
+ 107   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    244    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V8.16   MAIN                                                                  07/12/2017 21:52:37 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
