@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\DhananjayAggarwal\Desktop\Anti Theft Alarm\uart check\uart_string.uv2
+Project File Date:  07/13/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_STNCMP?MAIN
+Program Size: data=80.0 xdata=0 code=419
+creating hex file from "uart_string"...
+"uart_string" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_STNCMP?MAIN
+Program Size: data=80.0 xdata=0 code=419
+creating hex file from "uart_string"...
+"uart_string" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+MAIN.C(79): warning C231: '_strcmp': attempt to redefine intrinsic function
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_STRCMP?MAIN
+Program Size: data=80.0 xdata=0 code=419
+creating hex file from "uart_string"...
+"uart_string" - 0 Error(s), 2 Warning(s).

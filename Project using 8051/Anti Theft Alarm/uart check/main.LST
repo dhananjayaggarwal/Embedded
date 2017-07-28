@@ -1,0 +1,115 @@
+C51 COMPILER V8.16   MAIN                                                                  07/15/2017 15:50:00 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          
+   3          void uart_init();
+   4          int stncmp(char* , char*);
+   5          unsigned char ch, flag=0, i=0, sbuff[20], check=1, rdy[]="RDY", cfun[]="+CFUN: READY", cpin[]="+CPIN: READ
+             -Y", call_ready[]="Call Ready";
+   6          void tx0(unsigned char);
+   7          void main()
+   8          {
+   9   1      uart_init();
+  10   1      for(i=0;i<1000;i++)
+  11   1      {}
+  12   1      tx0('O');
+  13   1      
+  14   1      /*while(check){
+  15   1                check=stncmp(sbuff,"RDY");
+  16   1      }
+  17   1      while(check){
+  18   1                check=stncmp(sbuff,cfun);
+  19   1      }
+  20   1      while(check){
+  21   1                check=stncmp(sbuff,cpin);
+  22   1      }
+  23   1      while(check){
+  24   1                check=stncmp(sbuff,call_ready);
+  25   1      } */
+  26   1      
+  27   1      tx0('K');
+  28   1      while(1)
+  29   1      {
+  30   2      if(flag==1)
+  31   2      {       flag=0;
+  32   3              
+  33   3      }
+  34   2      }
+  35   1      
+  36   1      }
+  37          
+  38          
+  39          void uart_init()
+  40          {
+  41   1              TMOD=0x20;              // select the timer 1
+  42   1              SCON=0x50;              // initilise UART
+  43   1              TH1=0xfd;               // baud rate----9600
+  44   1              EA=1;                   // enable globel interrupt
+  45   1              ES=1;
+  46   1              TR1=1;                  // enable timer 1
+  47   1      }
+  48          
+  49          void serial_interupt() interrupt 4
+  50          {
+  51   1        if(RI==1)
+  52   1        {
+  53   2              ch=SBUF;
+  54   2              RI=0;
+C51 COMPILER V8.16   MAIN                                                                  07/15/2017 15:50:00 PAGE 2   
+
+  55   2        
+  56   2        flag=1;
+  57   2      
+  58   2        if(ch!=0x0d)
+  59   2              {
+  60   3              sbuff[i++]=ch;
+  61   3              }
+  62   2              else
+  63   2              {
+  64   3                sbuff[i]='\0';
+  65   3                i=0;
+  66   3              }
+  67   2        }
+  68   1        else TI=0;
+  69   1      }
+  70          
+  71          int strcmp(char* a, char* b)
+  72          {
+  73   1      while(*a++==*b++)
+  74   1      {
+  75   2              if(*a=='\0')
+  76   2              return 0;
+  77   2              return 1;
+  78   2      }
+  79   1      }
+*** WARNING C231 IN LINE 79 OF MAIN.C: '_strcmp': attempt to redefine intrinsic function
+  80          
+  81          void tx0(unsigned char x) //send data to serial port 0
+  82          {
+  83   1      //      EA=0;
+  84   1              SBUF=x;
+  85   1              while(TI==0);
+  86   1              TI=0;
+  87   1      //      EA=1;
+  88   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    189    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     65       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

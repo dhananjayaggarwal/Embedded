@@ -1,0 +1,170 @@
+C51 COMPILER V8.16   ANTITHEFT                                                             07/15/2017 16:59:18 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ANTITHEFT
+OBJECT MODULE PLACED IN antitheft.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE antitheft.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          #include<lcd.h>
+   3          #include<adc.h>
+   4          #include<stdio.h>
+   5          #include<gsm.h>
+   6          
+   7          sbit buzz = P2^7;
+   8          sbit relay1 = P2^1;       //pin 22
+   9          sbit relay2 = P2^0;      //pin 21
+  10          sbit closeswitch = P2^3; //switch to off alarm
+  11          sbit ir1 = P2^4; //pin25
+  12          sbit ir2 = P2^5; //pin 26
+  13          unsigned int flag=0, i=0, flag1=0;
+  14          unsigned char buffer[10];
+  15          int j;
+  16          void detect();
+  17          void check_ir(void);
+  18          void detect1();
+  19          char ok[]="OK";
+  20          
+  21          char strbuf[25];
+  22          int count=0;
+  23          
+  24          
+  25          
+  26          
+  27          
+  28          void main()
+  29          {
+  30   1        lcd_init();
+  31   1        custom();
+  32   1        lcd_string("Welcome...");
+  33   1        ir2=0;
+  34   1        relay1=0;
+  35   1        relay2=0;
+  36   1        buzz=0;
+  37   1        uart_init();
+  38   1        delay(30000);
+  39   1        delay(30000);
+  40   1        
+  41   1        
+  42   1       /* tx_string("AT");
+  43   1              str[0]=rx_data;
+  44   1              str[1]=rx_data;
+  45   1              while(!strcomp(str,ok));
+  46   1              str[0]='\0';
+  47   1         */
+  48   1        
+  49   1              while(1)
+  50   1              {
+  51   2                 detect();
+  52   2                 if(i==2000&&flag1==0)
+  53   2                 {
+  54   3                 i=0;
+  55   3                 adc_read();
+C51 COMPILER V8.16   ANTITHEFT                                                             07/15/2017 16:59:18 PAGE 2   
+
+  56   3                 sprintf(buffer,"Illuminance: %d",adcvalue/5);
+  57   3                      lcd_command(0x01);
+  58   3                      lcd_string(buffer);
+  59   3                      for(j=0;j<20000;j++)
+  60   3                              {
+  61   4                                check_ir();
+  62   4                              }
+  63   3      
+  64   3                 } 
+  65   2                 if(flag==1)
+  66   2                 {
+  67   3                   flag=0;
+  68   3                       detect1();
+  69   3                 }
+  70   2      
+  71   2      
+  72   2                 i++;
+  73   2                 
+  74   2                 
+  75   2              }
+  76   1      
+  77   1              
+  78   1      }
+  79          
+  80          
+  81          
+  82          void detect()
+  83          {
+  84   1          
+  85   1              if(ir2==1) //as soon as ir sensor output becomes high
+  86   1              {
+  87   2              //       gsm_init();
+  88   2              //      delay(1000);                      //switch everything on
+  89   2                      flag1=1;
+  90   2                      relay1=1;
+  91   2                      delay(1500);
+  92   2                      relay2=1;
+  93   2                      delay(1500);
+  94   2              /*      if((relay1||relay2)==1)
+  95   2              {       buzz=1;} */ 
+  96   2                      lcd_command(0x01);
+  97   2                      lcd_string("ALERT");
+  98   2                      lcd_data(0); //Three exclamations are stored on location 0 of cg ram(custom font)
+  99   2                      gsm_call();
+ 100   2              
+ 101   2              }
+ 102   1              if(closeswitch==0)         //as soon as switch is pressed, switch off alarms/relays
+ 103   1              {
+ 104   2                    flag1=0;
+ 105   2                        buzz=0;
+ 106   2                          relay1=0;
+ 107   2                              relay2=0;
+ 108   2                              lcd_command(0x01);
+ 109   2                              lcd_string("You are now safe");
+ 110   2                              ;
+ 111   2                              for(j=0;j<30000;j++)
+ 112   2                              {
+ 113   3                                check_ir();
+ 114   3                              }
+ 115   2              }
+ 116   1      
+ 117   1      }
+C51 COMPILER V8.16   ANTITHEFT                                                             07/15/2017 16:59:18 PAGE 3   
+
+ 118          
+ 119          void check_ir()
+ 120          {
+ 121   1              if(ir2==1)
+ 122   1              {
+ 123   2              flag=1;
+ 124   2              }
+ 125   1      }
+ 126          
+ 127          void detect1()
+ 128          {
+ 129   1              //       gsm_init();
+ 130   1              //      delay(1000);                      //switch everything on
+ 131   1                      flag1=1;
+ 132   1                      relay1=1;
+ 133   1                      delay(1500);
+ 134   1                      relay2=1;
+ 135   1                      delay(1500);
+ 136   1              /*      if((relay1||relay2)==1)
+ 137   1              {       buzz=1;} */ 
+ 138   1                      lcd_command(0x01);
+ 139   1                      lcd_string("ALERT");
+ 140   1                      lcd_data(0); //Three exclamations are stored on location 0 of cg ram(custom font)
+ 141   1                      gsm_call();
+ 142   1              }
+ 143          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    797    ----
+   CONSTANT SIZE    =     74    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     78       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

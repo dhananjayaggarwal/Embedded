@@ -1,0 +1,145 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        07/15/2017  18:05:29  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE adc.obj TO adc RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  adc.obj (ADC)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  adc (ADC)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0018H     UNIT         ?DT?ADC
+            IDATA   0020H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0028H     UNIT         ?PR?MAIN?ADC
+            CODE    0828H     001CH     UNIT         ?PR?_DELAY?ADC
+            CODE    0844H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0850H     0008H     UNIT         ?CO?ADC
+
+
+
+OVERLAY MAP OF MODULE:   adc (ADC)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?ADC
+
+?PR?MAIN?ADC
+  +--> ?CO?ADC
+  +--> ?PR?_DELAY?ADC
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   LCD_INIT
+   _LCD_COMMAND
+   _LCD_STRING
+
+
+
+SYMBOL TABLE OF MODULE:  adc (ADC)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  18:05:29  PAGE 2
+
+
+  ----------------------------------
+
+  -------         MODULE        ADC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:082CH         PUBLIC        _delay
+  B:00A0H.7       PUBLIC        buzzer
+  C:0800H         PUBLIC        main
+  D:0008H         PUBLIC        adcvalue
+  D:000AH         PUBLIC        adcoutput
+  D:000CH         PUBLIC        buffer
+  -------         PROC          MAIN
+  C:0800H         LINE#         24
+  C:0800H         LINE#         25
+  C:0800H         LINE#         26
+  C:0803H         LINE#         27
+  C:080CH         LINE#         28
+  C:080FH         LINE#         29
+  C:0812H         LINE#         31
+  C:0817H         LINE#         32
+  C:081AH         LINE#         33
+  C:081DH         LINE#         34
+  C:081FH         LINE#         35
+  C:0826H         LINE#         36
+  C:0826H         LINE#         37
+  C:0826H         LINE#         50
+  -------         ENDPROC       MAIN
+  C:0828H         SYMBOL        L?0010
+  -------         PROC          L?0009
+  -------         ENDPROC       L?0009
+  C:0828H         SYMBOL        L?0010
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:082CH         LINE#         78
+  C:082CH         LINE#         79
+  C:082CH         LINE#         81
+  C:0843H         LINE#         82
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        ADC
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCD_STRING
+    MODULE:  adc.obj (ADC)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LCD_INIT
+    MODULE:  adc.obj (ADC)
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCD_COMMAND
+    MODULE:  adc.obj (ADC)
+
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  18:05:29  PAGE 3
+
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LCD_INIT
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 0801H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCD_STRING
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 080AH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCD_COMMAND
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 0815H
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 004CH BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=33.0 xdata=0 code=91
+LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,86 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Users\DhananjayAggarwal\Desktop\Anti Theft Alarm\adc_check\adc.uv2
+Project File Date:  07/15/2017
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling adc.c...
+linking...
+Program Size: data=54.1 xdata=0 code=1492
+creating hex file from "adc"...
+"adc" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling adc.c...
+linking...
+Program Size: data=54.1 xdata=0 code=1492
+creating hex file from "adc"...
+"adc" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling adc.c...
+linking...
+Program Size: data=54.1 xdata=0 code=1501
+creating hex file from "adc"...
+"adc" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling adc.c...
+linking...
+Program Size: data=54.1 xdata=0 code=1501
+creating hex file from "adc"...
+"adc" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling adc.c...
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCD_STRING
+    MODULE:  adc.obj (ADC)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LCD_INIT
+    MODULE:  adc.obj (ADC)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCD_COMMAND
+    MODULE:  adc.obj (ADC)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LCD_INIT
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 0801H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCD_STRING
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 080AH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCD_COMMAND
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 0815H
+Program Size: data=33.0 xdata=0 code=91
+creating hex file from "adc"...
+"adc" - 0 Error(s), 6 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCD_STRING
+    MODULE:  adc.obj (ADC)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  LCD_INIT
+    MODULE:  adc.obj (ADC)
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  _LCD_COMMAND
+    MODULE:  adc.obj (ADC)
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  LCD_INIT
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 0801H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCD_STRING
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 080AH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  _LCD_COMMAND
+    MODULE:  adc.obj (ADC)
+    ADDRESS: 0815H
+Program Size: data=33.0 xdata=0 code=91
+creating hex file from "adc"...
+"adc" - 0 Error(s), 6 Warning(s).

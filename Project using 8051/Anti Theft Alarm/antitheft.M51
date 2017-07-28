@@ -1,0 +1,578 @@
+BL51 BANKED LINKER/LOCATER V6.15                                                        07/15/2017  16:59:18  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.15, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE antitheft.obj TO antitheft RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  antitheft.obj (ANTITHEFT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (PRINTF)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDIIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CCASE)
+  C:\KEIL\C51\LIB\C51S.LIB (PUTCHAR)
+
+
+LINK MAP OF MODULE:  antitheft (ANTITHEFT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0014H     UNIT         _DATA_GROUP_
+                    001CH     0004H                  *** GAP ***
+            BIT     0020H.0   0001H.1   UNIT         _BIT_GROUP_
+                    0021H.1   0000H.7                *** GAP ***
+            DATA    0022H     004EH     UNIT         ?DT?ANTITHEFT
+            DATA    0070H     0006H     UNIT         ?DT?_STRCOMP?ANTITHEFT
+            IDATA   0076H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     035CH     UNIT         ?PR?PRINTF?PRINTF
+            CODE    0B5CH     00E3H     UNIT         ?C?LIB_CODE
+            CODE    0C3FH     00A3H     UNIT         ?PR?MAIN?ANTITHEFT
+            CODE    0CE2H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0D6EH     0055H     UNIT         ?PR?_STRCOMP?ANTITHEFT
+            CODE    0DC3H     004AH     UNIT         ?CO?ANTITHEFT
+            CODE    0E0DH     0046H     UNIT         ?PR?DETECT?ANTITHEFT
+            CODE    0E53H     0042H     UNIT         ?PR?_LCD_STRING?ANTITHEFT
+            CODE    0E95H     003CH     UNIT         ?PR?_DELAY?ANTITHEFT
+            CODE    0ED1H     003CH     UNIT         ?PR?LCD_INIT?ANTITHEFT
+            CODE    0F0DH     003CH     UNIT         ?PR?ADC_READ?ANTITHEFT
+            CODE    0F49H     002FH     UNIT         ?PR?_LCD_DATA?ANTITHEFT
+            CODE    0F78H     002AH     UNIT         ?PR?_LCD_COMMAND?ANTITHEFT
+            CODE    0FA2H     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
+            CODE    0FC9H     0024H     UNIT         ?PR?GSM_CALL?ANTITHEFT
+            CODE    0FEDH     001EH     UNIT         ?PR?CUSTOM?ANTITHEFT
+            CODE    100BH     0016H     UNIT         ?C_INITSEG
+            CODE    1021H     0013H     UNIT         ?PR?_TX_STRING?ANTITHEFT
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 2
+
+
+            CODE    1034H     000CH     UNIT         ?PR?UART_INIT?ANTITHEFT
+            CODE    1040H     000BH     UNIT         ?PR?DETECT1?ANTITHEFT
+            CODE    104BH     000AH     UNIT         ?PR?RX_DATA?ANTITHEFT
+            CODE    1055H     000AH     UNIT         ?PR?CHECK_IR?ANTITHEFT
+            CODE    105FH     0008H     UNIT         ?PR?_GSM_WRITE?ANTITHEFT
+            CODE    1067H     0008H     UNIT         ?PR?_TX_DATA?ANTITHEFT
+
+
+
+OVERLAY MAP OF MODULE:   antitheft (ANTITHEFT)
+
+
+SEGMENT                               BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT              START    LENGTH     START    LENGTH
+----------------------------------------------------------------------
+?C_C51STARTUP                      -----    -----      -----    -----
+  +--> ?PR?MAIN?ANTITHEFT
+  +--> ?C_INITSEG
+
+?PR?MAIN?ANTITHEFT                 -----    -----      -----    -----
+  +--> ?PR?LCD_INIT?ANTITHEFT
+  +--> ?PR?CUSTOM?ANTITHEFT
+  +--> ?CO?ANTITHEFT
+  +--> ?PR?_LCD_STRING?ANTITHEFT
+  +--> ?PR?UART_INIT?ANTITHEFT
+  +--> ?PR?_DELAY?ANTITHEFT
+  +--> ?PR?DETECT?ANTITHEFT
+  +--> ?PR?ADC_READ?ANTITHEFT
+  +--> ?PR?PRINTF?PRINTF
+  +--> ?PR?_LCD_COMMAND?ANTITHEFT
+  +--> ?PR?CHECK_IR?ANTITHEFT
+  +--> ?PR?DETECT1?ANTITHEFT
+
+?PR?LCD_INIT?ANTITHEFT             -----    -----      -----    -----
+  +--> ?PR?_LCD_COMMAND?ANTITHEFT
+  +--> ?PR?_DELAY?ANTITHEFT
+
+?PR?_LCD_COMMAND?ANTITHEFT         -----    -----      -----    -----
+  +--> ?PR?_DELAY?ANTITHEFT
+
+?PR?CUSTOM?ANTITHEFT               -----    -----      -----    -----
+  +--> ?PR?_LCD_COMMAND?ANTITHEFT
+  +--> ?PR?_LCD_DATA?ANTITHEFT
+
+?PR?_LCD_DATA?ANTITHEFT            -----    -----      -----    -----
+  +--> ?PR?_DELAY?ANTITHEFT
+
+?PR?_LCD_STRING?ANTITHEFT          -----    -----      0008H    0003H
+  +--> ?PR?_DELAY?ANTITHEFT
+  +--> ?PR?_LCD_COMMAND?ANTITHEFT
+  +--> ?CO?ANTITHEFT
+  +--> ?PR?_LCD_DATA?ANTITHEFT
+
+?PR?DETECT?ANTITHEFT               -----    -----      -----    -----
+  +--> ?PR?_LCD_STRING?ANTITHEFT
+  +--> ?PR?_LCD_DATA?ANTITHEFT
+  +--> ?PR?GSM_CALL?ANTITHEFT
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 3
+
+
+  +--> ?PR?_LCD_COMMAND?ANTITHEFT
+  +--> ?CO?ANTITHEFT
+  +--> ?PR?CHECK_IR?ANTITHEFT
+
+?PR?GSM_CALL?ANTITHEFT             -----    -----      -----    -----
+  +--> ?CO?ANTITHEFT
+  +--> ?PR?_TX_STRING?ANTITHEFT
+  +--> ?PR?_DELAY?ANTITHEFT
+
+?PR?_TX_STRING?ANTITHEFT           -----    -----      -----    -----
+  +--> ?PR?_TX_DATA?ANTITHEFT
+
+?PR?ADC_READ?ANTITHEFT             -----    -----      -----    -----
+  +--> ?PR?_DELAY?ANTITHEFT
+  +--> ?PR?CHECK_IR?ANTITHEFT
+
+?PR?PRINTF?PRINTF                  0020H.0  0001H.1    0008H    0014H
+  +--> ?PR?PUTCHAR?PUTCHAR
+
+?PR?DETECT1?ANTITHEFT              -----    -----      -----    -----
+  +--> ?PR?_LCD_STRING?ANTITHEFT
+  +--> ?PR?_LCD_DATA?ANTITHEFT
+  +--> ?PR?GSM_CALL?ANTITHEFT
+
+
+
+SYMBOL TABLE OF MODULE:  antitheft (ANTITHEFT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ANTITHEFT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0D6EH         PUBLIC        _strcomp
+  B:00A0H.5       PUBLIC        ir2
+  C:0EB9H         PUBLIC        _delay
+  D:0022H         PUBLIC        strbuf
+  B:0098H.0       PUBLIC        RI
+  D:003BH         PUBLIC        flag
+  B:0098H.1       PUBLIC        TI
+  C:0FEDH         PUBLIC        custom
+  C:0C3FH         PUBLIC        main
+  C:0F0DH         PUBLIC        adc_read
+  D:003DH         PUBLIC        count
+  C:1040H         PUBLIC        detect1
+  B:00A0H.3       PUBLIC        closeswitch
+  C:0E72H         PUBLIC        _lcd_string
+  C:0F4EH         PUBLIC        _lcd_data
+  D:0099H         PUBLIC        SBUF
+  B:00B0H.4       PUBLIC        ale
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  B:00B0H.5       PUBLIC        eoc
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 4
+
+
+  C:1055H         PUBLIC        check_ir
+  C:0FC9H         PUBLIC        gsm_call
+  D:003FH         PUBLIC        adcvalue
+  C:0ED1H         PUBLIC        lcd_init
+  D:0041H         PUBLIC        flag1
+  B:00A0H.7       PUBLIC        buzz
+  D:008DH         PUBLIC        TH1
+  B:00A0H.1       PUBLIC        relay1
+  B:00A0H.0       PUBLIC        relay2
+  B:0080H.1       PUBLIC        en
+  C:1034H         PUBLIC        uart_init
+  C:105FH         PUBLIC        _gsm_write
+  B:0088H.6       PUBLIC        TR1
+  D:0043H         PUBLIC        ok
+  D:0046H         PUBLIC        str
+  B:0080H.0       PUBLIC        rs
+  C:104BH         PUBLIC        rx_data
+  D:0060H         PUBLIC        i
+  C:1021H         PUBLIC        _tx_string
+  D:0062H         PUBLIC        j
+  C:1067H         PUBLIC        _tx_data
+  D:0064H         PUBLIC        k
+  B:00B0H.6       PUBLIC        add_a
+  B:00B0H.7       PUBLIC        add_b
+  C:0F78H         PUBLIC        _lcd_command
+  C:0E0DH         PUBLIC        detect
+  D:0066H         PUBLIC        buffer
+  -------         PROC          L?0055
+  -------         ENDPROC       L?0055
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:0EB9H         LINE#         9
+  C:0EB9H         LINE#         10
+  C:0EB9H         LINE#         12
+  C:0ED0H         LINE#         13
+  -------         ENDPROC       _DELAY
+  -------         PROC          _LCD_COMMAND
+  D:0003H         SYMBOL        comd
+  C:0F78H         LINE#         15
+  C:0F7AH         LINE#         16
+  C:0F7AH         LINE#         17
+  C:0F7CH         LINE#         18
+  C:0F7FH         LINE#         19
+  C:0F84H         LINE#         20
+  C:0F86H         LINE#         21
+  C:0F8DH         LINE#         22
+  C:0F8FH         LINE#         24
+  C:0F92H         LINE#         25
+  C:0F98H         LINE#         26
+  C:0F9AH         LINE#         27
+  C:0F9FH         LINE#         28
+  C:0FA1H         LINE#         30
+  -------         ENDPROC       _LCD_COMMAND
+  -------         PROC          LCD_INIT
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 5
+
+
+  C:0ED1H         LINE#         32
+  C:0ED1H         LINE#         33
+  C:0ED1H         LINE#         34
+  C:0ED6H         LINE#         35
+  C:0EDDH         LINE#         37
+  C:0EE2H         LINE#         38
+  C:0EE9H         LINE#         40
+  C:0EEEH         LINE#         41
+  C:0EF5H         LINE#         43
+  C:0EFAH         LINE#         44
+  C:0F01H         LINE#         46
+  C:0F06H         LINE#         47
+  -------         ENDPROC       LCD_INIT
+  C:0F49H         SYMBOL        L?0058
+  -------         PROC          L?0057
+  -------         ENDPROC       L?0057
+  C:0F49H         SYMBOL        L?0058
+  -------         PROC          _LCD_DATA
+  D:0003H         SYMBOL        dat
+  C:0F4EH         LINE#         50
+  C:0F50H         LINE#         51
+  C:0F50H         LINE#         52
+  C:0F52H         LINE#         54
+  C:0F55H         LINE#         55
+  C:0F5AH         LINE#         56
+  C:0F5CH         LINE#         57
+  C:0F63H         LINE#         58
+  C:0F65H         LINE#         60
+  C:0F68H         LINE#         61
+  C:0F6EH         LINE#         62
+  C:0F70H         LINE#         63
+  C:0F75H         LINE#         64
+  C:0F77H         LINE#         65
+  -------         ENDPROC       _LCD_DATA
+  -------         PROC          L?0056
+  -------         ENDPROC       L?0056
+  -------         PROC          _LCD_STRING
+  D:0008H         SYMBOL        s
+  C:0E72H         LINE#         66
+  C:0E78H         LINE#         67
+  C:0E78H         LINE#         69
+  C:0E84H         LINE#         70
+  C:0E84H         LINE#         71
+  C:0E87H         LINE#         72
+  C:0E92H         LINE#         73
+  C:0E94H         LINE#         74
+  -------         ENDPROC       _LCD_STRING
+  -------         PROC          _STRCOMP
+  D:0070H         SYMBOL        a
+  D:0073H         SYMBOL        b
+  C:0D6EH         LINE#         104
+  C:0D74H         LINE#         105
+  C:0D74H         LINE#         106
+  C:0D8AH         LINE#         107
+  C:0D8AH         LINE#         108
+  C:0D8CH         LINE#         109
+  C:0D8FH         LINE#         110
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 6
+
+
+  C:0D9AH         LINE#         111
+  C:0DA5H         LINE#         112
+  C:0DA7H         LINE#         113
+  C:0DC2H         LINE#         114
+  -------         ENDPROC       _STRCOMP
+  -------         PROC          CUSTOM
+  C:0FEDH         LINE#         116
+  C:0FEDH         LINE#         117
+  C:0FEDH         LINE#         118
+  C:0FF2H         LINE#         119
+  C:0FF4H         LINE#         120
+  C:0FF7H         LINE#         121
+  C:0FF9H         LINE#         122
+  C:0FFCH         LINE#         123
+  C:1001H         LINE#         124
+  C:1003H         LINE#         125
+  C:1006H         LINE#         127
+  -------         ENDPROC       CUSTOM
+  -------         PROC          ADC_READ
+  C:0F0DH         LINE#         13
+  C:0F0DH         LINE#         14
+  C:0F0DH         LINE#         17
+  C:0F0FH         LINE#         18
+  C:0F11H         LINE#         19
+  C:0F18H         LINE#         20
+  C:0F1BH         LINE#         21
+  C:0F1DH         LINE#         22
+  C:0F24H         LINE#         23
+  C:0F26H         LINE#         24
+  C:0F29H         LINE#         25
+  C:0F30H         LINE#         26
+  C:0F33H         LINE#         27
+  C:0F35H         LINE#         28
+  C:0F3CH         LINE#         29
+  C:0F3FH         LINE#         33
+  C:0F46H         LINE#         34
+  C:0F48H         LINE#         35
+  -------         ENDPROC       ADC_READ
+  -------         PROC          UART_INIT
+  C:1034H         LINE#         7
+  C:1034H         LINE#         8
+  C:1034H         LINE#         9
+  C:1037H         LINE#         10
+  C:103AH         LINE#         11
+  C:103DH         LINE#         12
+  C:103FH         LINE#         13
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _GSM_WRITE
+  D:0007H         SYMBOL        ch
+  C:105FH         LINE#         15
+  C:105FH         LINE#         16
+  C:105FH         LINE#         17
+  C:1061H         LINE#         18
+  C:1064H         LINE#         19
+  C:1066H         LINE#         20
+  -------         ENDPROC       _GSM_WRITE
+  -------         PROC          _TX_DATA
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 7
+
+
+  D:0007H         SYMBOL        serialdata
+  C:1067H         LINE#         24
+  C:1067H         LINE#         25
+  C:1067H         LINE#         26
+  C:1069H         LINE#         27
+  C:106CH         LINE#         28
+  C:106EH         LINE#         29
+  -------         ENDPROC       _TX_DATA
+  -------         PROC          RX_DATA
+  C:104BH         LINE#         31
+  C:104BH         LINE#         32
+  C:104BH         LINE#         33
+  C:104EH         LINE#         34
+  C:1050H         LINE#         35
+  C:1054H         LINE#         36
+  -------         ENDPROC       RX_DATA
+  -------         PROC          _TX_STRING
+  D:0001H         SYMBOL        str
+  C:1021H         LINE#         38
+  C:1021H         LINE#         39
+  C:1021H         LINE#         40
+  C:1027H         LINE#         41
+  C:1027H         LINE#         49
+  C:102AH         LINE#         50
+  C:1031H         LINE#         52
+  C:1033H         LINE#         53
+  -------         ENDPROC       _TX_STRING
+  -------         PROC          GSM_CALL
+  C:0FC9H         LINE#         55
+  C:0FC9H         LINE#         56
+  C:0FC9H         LINE#         57
+  C:0FD2H         LINE#         58
+  C:0FD6H         LINE#         59
+  C:0FD6H         LINE#         60
+  C:0FD6H         LINE#         61
+  C:0FD6H         LINE#         62
+  C:0FD6H         LINE#         63
+  C:0FD6H         LINE#         64
+  C:0FD6H         LINE#         65
+  C:0FD6H         LINE#         66
+  C:0FD6H         LINE#         67
+  C:0FD6H         LINE#         68
+  C:0FD6H         LINE#         69
+  C:0FD6H         LINE#         70
+  C:0FD9H         LINE#         71
+  C:0FDCH         LINE#         72
+  C:0FDCH         LINE#         73
+  C:0FDCH         LINE#         74
+  C:0FDCH         LINE#         75
+  C:0FDCH         LINE#         76
+  C:0FDCH         LINE#         77
+  C:0FDCH         LINE#         78
+  C:0FDCH         LINE#         79
+  C:0FDCH         LINE#         80
+  C:0FDCH         LINE#         81
+  C:0FDCH         LINE#         82
+  C:0FDCH         LINE#         83
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 8
+
+
+  C:0FDCH         LINE#         84
+  C:0FDFH         LINE#         85
+  C:0FE6H         LINE#         86
+  -------         ENDPROC       GSM_CALL
+  -------         PROC          MAIN
+  C:0C3FH         LINE#         28
+  C:0C3FH         LINE#         29
+  C:0C3FH         LINE#         30
+  C:0C42H         LINE#         31
+  C:0C45H         LINE#         32
+  C:0C4EH         LINE#         33
+  C:0C50H         LINE#         34
+  C:0C52H         LINE#         35
+  C:0C54H         LINE#         36
+  C:0C56H         LINE#         37
+  C:0C59H         LINE#         38
+  C:0C60H         LINE#         39
+  C:0C63H         LINE#         49
+  C:0C63H         LINE#         50
+  C:0C63H         LINE#         51
+  C:0C66H         LINE#         52
+  C:0C78H         LINE#         53
+  C:0C78H         LINE#         54
+  C:0C7CH         LINE#         55
+  C:0C7FH         LINE#         56
+  C:0CA0H         LINE#         57
+  C:0CA5H         LINE#         58
+  C:0CAEH         LINE#         59
+  C:0CB3H         LINE#         60
+  C:0CB3H         LINE#         61
+  C:0CB6H         LINE#         62
+  C:0CC9H         LINE#         64
+  C:0CC9H         LINE#         65
+  C:0CD1H         LINE#         66
+  C:0CD1H         LINE#         67
+  C:0CD5H         LINE#         68
+  C:0CD8H         LINE#         69
+  C:0CD8H         LINE#         72
+  C:0CE0H         LINE#         75
+  -------         ENDPROC       MAIN
+  -------         PROC          DETECT
+  C:0E0DH         LINE#         82
+  C:0E0DH         LINE#         83
+  C:0E0DH         LINE#         85
+  C:0E10H         LINE#         86
+  C:0E10H         LINE#         89
+  C:0E10H         LINE#         90
+  C:0E10H         LINE#         91
+  C:0E10H         LINE#         92
+  C:0E10H         LINE#         93
+  C:0E10H         LINE#         96
+  C:0E10H         LINE#         97
+  C:0E13H         LINE#         98
+  C:0E18H         LINE#         99
+  C:0E1BH         LINE#         101
+  C:0E1BH         LINE#         102
+  C:0E1EH         LINE#         103
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 9
+
+
+  C:0E1EH         LINE#         104
+  C:0E23H         LINE#         105
+  C:0E25H         LINE#         106
+  C:0E27H         LINE#         107
+  C:0E29H         LINE#         108
+  C:0E2EH         LINE#         109
+  C:0E37H         LINE#         111
+  C:0E3CH         LINE#         112
+  C:0E3CH         LINE#         113
+  C:0E3FH         LINE#         114
+  C:0E52H         LINE#         115
+  C:0E52H         LINE#         117
+  -------         ENDPROC       DETECT
+  -------         PROC          CHECK_IR
+  C:1055H         LINE#         119
+  C:1055H         LINE#         120
+  C:1055H         LINE#         121
+  C:1058H         LINE#         122
+  C:1058H         LINE#         123
+  C:105EH         LINE#         124
+  C:105EH         LINE#         125
+  -------         ENDPROC       CHECK_IR
+  -------         PROC          DETECT1
+  C:1040H         LINE#         127
+  C:1040H         LINE#         128
+  C:1040H         LINE#         131
+  C:1040H         LINE#         132
+  C:1040H         LINE#         133
+  C:1040H         LINE#         134
+  C:1040H         LINE#         135
+  C:1040H         LINE#         138
+  C:1040H         LINE#         139
+  C:1043H         LINE#         140
+  C:1048H         LINE#         141
+  -------         ENDPROC       DETECT1
+  -------         ENDMOD        ANTITHEFT
+
+  -------         MODULE        ?C?CLDPTR
+  C:0B5CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?UIDIV
+  C:0B75H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        PRINTF
+  D:0008H         PUBLIC        ?_PRINTF517?BYTE
+  D:0008H         PUBLIC        ?_PRINTF?BYTE
+  D:0008H         PUBLIC        ?_SPRINTF517?BYTE
+  D:0008H         PUBLIC        ?_SPRINTF?BYTE
+  C:0862H         PUBLIC        _PRINTF
+  C:0862H         PUBLIC        _PRINTF517
+  C:085CH         PUBLIC        _SPRINTF
+  C:085CH         PUBLIC        _SPRINTF517
+  -------         ENDMOD        PRINTF
+
+  -------         MODULE        ?C?CLDOPTR
+BL51 BANKED LINKER/LOCATER V6.15                                                      07/15/2017  16:59:18  PAGE 10
+
+
+  C:0BCAH         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0BF7H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?PLDIIDATA
+  C:0C09H         PUBLIC        ?C?PLDIIDATA
+  -------         ENDMOD        ?C?PLDIIDATA
+
+  -------         MODULE        ?C?CCASE
+  C:0C19H         PUBLIC        ?C?CCASE
+  -------         ENDMOD        ?C?CCASE
+
+  -------         MODULE        PUTCHAR
+  C:0FA2H         PUBLIC        _PUTCHAR
+  -------         ENDMOD        PUTCHAR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_STRCOMP?ANTITHEFT
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GSM_WRITE?ANTITHEFT
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RX_DATA?ANTITHEFT
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 037CH BYTE (43%) *
+******************************************************************************
+
+Program Size: data=114.1 xdata=0 code=2162
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

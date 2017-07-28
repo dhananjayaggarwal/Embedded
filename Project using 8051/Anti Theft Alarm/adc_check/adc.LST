@@ -1,0 +1,172 @@
+C51 COMPILER V8.16   ADC                                                                   07/15/2017 18:05:28 PAGE 1   
+
+
+C51 COMPILER V8.16, COMPILATION OF MODULE ADC
+OBJECT MODULE PLACED IN adc.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE adc.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<regx52.h>
+   2          #include<stdio.h>
+   3          #define adcport P1 //pin 1-17, 2-14,3-15,4-8,5-18,6-19,7-20,8-21
+   4          
+   5          sbit ale = P3^4;  //14,6/22
+   6          sbit eoc = P3^5;  //15,7
+   7          sbit add_a = P3^6; //16,25
+   8          sbit add_b = P3^7;      //17,24
+   9          
+  10          #define lcdport P0
+  11          sbit rs = P0^0;    //0.0
+  12          sbit en = P0^1;   //0.1
+  13          sbit buzzer = P2^7;
+  14          
+  15          
+  16          unsigned int adcvalue, adcoutput;
+  17          int adc_read();
+  18          void lcd_init();
+  19          void delay(int t);
+  20          void lcd_command(unsigned char );
+  21          void lcd_data(unsigned char);
+  22          void lcd_string(char*);
+  23          unsigned char buffer[20];
+  24          void main()
+  25          {
+  26   1      lcd_init();
+  27   1      lcd_string("WELCOME");
+  28   1      delay(30000);
+  29   1      delay(30000);
+  30   1      
+  31   1      lcd_command(0x01);
+  32   1      delay(30000);
+  33   1      delay(30000);
+  34   1      buzzer=1;
+  35   1      delay(1000);
+  36   1      while(1)
+  37   1      {
+  38   2              //lcd_data('1');
+  39   2              //delay(30000);
+  40   2      //       adcoutput=adc_read();
+  41   2              //lcd_data('2');
+  42   2              
+  43   2               /*  sprintf(buffer,"%d",adcoutput/20);
+  44   2                      lcd_command(0x01);
+  45   2                      lcd_string(buffer);
+  46   2                       delay(30000);
+  47   2                       delay(30000);
+  48   2                       delay(30000);  */
+  49   2      
+  50   2      }
+  51   1      }
+  52          /*
+  53          int adc_read()
+  54          {
+  55                  
+C51 COMPILER V8.16   ADC                                                                   07/15/2017 18:05:28 PAGE 2   
+
+  56                  
+  57                  add_a=0;
+  58                  add_b=0;
+  59                  delay(100);
+  60                  
+  61                  ale=1;
+  62                  delay(1000);
+  63                  ale=0;
+  64          
+  65                  delay(1000);
+  66                  
+  67                  eoc=0;
+  68                          delay(10);
+  69                          while(eoc==1);
+  70                  
+  71                  
+  72                    
+  73                  adcvalue=adcport;
+  74                  return(adcvalue);
+  75          }  */
+  76          
+  77          
+  78           void delay(int t)
+  79          {
+  80   1              int i;
+  81   1              for(i=0;i<t;i++);
+  82   1      }
+  83          /*
+  84          void lcd_command(unsigned char comd)      //To send commands using 4 bit bus
+  85          {
+  86          rs=0;
+  87          lcdport&=0x0f;                                                                    //register select is low which implies command
+  88          lcdport|=(comd&0xf0);                                      //Most Significant 4 bits are send to microcontroller first
+  89          en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+  90          delay(100);
+  91          en=0;
+  92          
+  93          lcdport&=0x0f;                                                                                  //Nest LSB's are transferred
+  94          lcdport|=((comd<<4)&0xf0);
+  95          en=1;
+  96          delay(100);
+  97          en=0;
+  98          
+  99          }
+ 100          
+ 101          void lcd_init()                 //To initialize working of lcd
+ 102          {
+ 103          lcd_command(0x02);                // Cursor at home
+ 104          delay(15000);
+ 105          
+ 106          lcd_command(0x28);               //Function Set to 4 bit data bus
+ 107          delay(40);
+ 108          
+ 109          lcd_command(0x06);                //Entry Mode set increament/no shift
+ 110          delay(40);
+ 111          
+ 112          lcd_command(0x0f);                //Display on,cursor displayed,blinks
+ 113          delay(40);
+ 114          
+ 115          lcd_command(0x01);                //Clears all display and returns cursor to home(address 0)
+ 116          delay(16500);
+ 117          }
+C51 COMPILER V8.16   ADC                                                                   07/15/2017 18:05:28 PAGE 3   
+
+ 118          
+ 119          void lcd_data(unsigned char dat)                //To send data to lcd
+ 120          {
+ 121          rs=1;                                           //rs high implies read or write, we perform only write as we keep R/W pin grounded
+ 122          
+ 123          lcdport&=0x0f;                                                                    //register select is low which implies command
+ 124          lcdport|=(dat&0xf0);                                       //Most Significant 4 bits are send to microcontroller first
+ 125          en=1;                                                                      //when enable drops from high to low, bit is transferred to controller
+ 126          delay(100);
+ 127          en=0;
+ 128          
+ 129          lcdport&=0x0f;                                                                                  //Nest LSB's are transferred
+ 130          lcdport|=((dat<<4)&0xf0);
+ 131          en=1;
+ 132          delay(100);
+ 133          en=0;
+ 134          }
+ 135          void lcd_string(char* s)
+ 136          {
+ 137           
+ 138            while(*s!='\0')
+ 139            {
+ 140              lcd_data(*s);
+ 141                  s++;
+ 142            }
+ 143          }
+ 144             */
+ 145          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     68    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     24    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
